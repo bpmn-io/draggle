@@ -18,13 +18,20 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        'contra',
-        'crossvent'
+        'contra'
       ]
     }
   },
   test: {
     globals: true,
-    environment: 'jsdom'
+    environment: 'jsdom',
+    setupFiles: [
+      resolve(__dirname, 'test', 'setup.js')
+    ],
+    browser: {
+      enabled: true,
+      headless: true,
+      name: 'chrome'
+    }
   }
 });

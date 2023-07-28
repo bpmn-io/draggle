@@ -1,4 +1,4 @@
-import dragula from '../dist/dragula';
+import dragula from '..';
 
 import { test, expect } from 'vitest';
 
