@@ -8,12 +8,6 @@
 
 Browser support includes every sane browser and **IE7+**. <sub>_(Granted you polyfill the functional `Array` methods in ES5)_</sub>
 
-Framework support includes vanilla JavaScript, Angular, and React.
-
-- Official [Angular bridge][8] for `dragula` [_(demo)_][10]
-- Official [Angular 2 bridge][22] for `dragula` [_(demo)_][23]
-- Official [React bridge][9] for `dragula` [_(demo)_][11]
-
 # Demo
 
 [![demo.png][1]][2]
@@ -38,7 +32,7 @@ Have you ever wanted a drag and drop library that just works? That doesn't just 
 You can get it on npm.
 
 ```shell
-npm install dragula --save
+npm install @bpmn-io/dragula --save
 ```
 
 Or a CDN.
@@ -47,7 +41,7 @@ Or a CDN.
 <script src='https://unpkg.com/@bpmn-io/dragula@4.0.0/dist/dragula.js'></script>
 ```
 
-If you're not using either package manager, you can use `dragula` by downloading the [files in the `dist` folder][15]. We **strongly suggest** using `npm`, though.
+If you're not using either package manager, you can use `@bpmn-io/dragula` by downloading the files in the `dist` folder. We **strongly suggest** using `npm`, though.
 
 # Development
 
@@ -65,7 +59,7 @@ Place `dragula` in the `<body>`, instead.
 
 ## Including the CSS!
 
-There's [a few CSS styles][16] you need to incorporate in order for `dragula` to work as expected.
+There's a few CSS styles you need to incorporate in order for `dragula` to work as expected.
 
 You can add them by including `dist/dragula.css` in your document.
 
@@ -296,7 +290,7 @@ Removes all drag and drop events used by `dragula` to manage drag and drop betwe
 
 ## CSS
 
-Dragula uses only four CSS classes. Their purpose is quickly explained below, but you can check [`dist/dragula.css`][12] to see the corresponding CSS rules.
+Dragula uses only four CSS classes. Their purpose is quickly explained below, but you can check `dist/dragula.css` to see the corresponding CSS rules.
 
 - `gu-unselectable` is added to the `mirrorContainer` element when dragging. You can use it to style the `mirrorContainer` while something is being dragged.
 - `gu-transit` is added to the source element when its mirror image is dragged. It just adds opacity to it.
