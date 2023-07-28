@@ -12,7 +12,7 @@ export function lookupClass(className) {
   return cached;
 }
 
-export function addClass(el, className) {
+export function add(el, className) {
   var current = el.className;
   if (!current.length) {
     el.className = className;
@@ -21,11 +21,6 @@ export function addClass(el, className) {
   }
 }
 
-export function rmClass(el, className) {
+export function rm(el, className) {
   el.className = el.className.replace(lookupClass(className), ' ').trim();
 }
-
-export default {
-  add: addClass,
-  rm: rmClass
-};
