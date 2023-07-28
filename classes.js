@@ -1,10 +1,8 @@
-'use strict';
-
 var cache = {};
 var start = '(?:^|\\s)';
 var end = '(?:\\s|$)';
 
-function lookupClass (className) {
+export function lookupClass(className) {
   var cached = cache[className];
   if (cached) {
     cached.lastIndex = 0;
@@ -14,7 +12,7 @@ function lookupClass (className) {
   return cached;
 }
 
-function addClass (el, className) {
+export function addClass(el, className) {
   var current = el.className;
   if (!current.length) {
     el.className = className;
@@ -23,11 +21,11 @@ function addClass (el, className) {
   }
 }
 
-function rmClass (el, className) {
+export function rmClass(el, className) {
   el.className = el.className.replace(lookupClass(className), ' ').trim();
 }
 
-module.exports = {
+export default {
   add: addClass,
   rm: rmClass
 };

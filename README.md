@@ -1,11 +1,10 @@
 [![logo.png][3]][2]
 
-[![Travis CI][5]][4]
-[![Dependencies][6]][7]
-[![Dev Dependencies][17]][18]
-[![Patreon][19]][20]
-
 > Drag and drop so simple it hurts
+
+> This project was forked from https://github.com/bevacqua/dragula
+
+[![CI](https://github.com/bpmn-io/dragula/workflows/CI/badge.svg)](https://github.com/bpmn-io/dragula/actions?query=workflow%3ACI)
 
 Browser support includes every sane browser and **IE7+**. <sub>_(Granted you polyfill the functional `Array` methods in ES5)_</sub>
 
@@ -45,26 +44,30 @@ npm install dragula --save
 Or a CDN.
 
 ```shell
-<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script>
+<script src='https://unpkg.com/@bpmn-io/dragula@4.0.0/dist/dragula.js'></script>
 ```
 
 If you're not using either package manager, you can use `dragula` by downloading the [files in the `dist` folder][15]. We **strongly suggest** using `npm`, though.
 
-##### Including the JavaScript
+# Development
+
+Spin up a development server.
+
+```shell
+npm start
+```
+
+## Including the JavaScript
 
 There's a caveat to `dragula`. You shouldn't include it in the `<head>` of your web applications. It's bad practice to place scripts in the `<head>`, and as such `dragula` makes no effort to support this use case.
 
 Place `dragula` in the `<body>`, instead.
 
-##### Including the CSS!
+## Including the CSS!
 
 There's [a few CSS styles][16] you need to incorporate in order for `dragula` to work as expected.
 
-You can add them by including [`dist/dragula.css`][12] or [`dist/dragula.min.css`][13] in your document. If you're using Stylus, you can include the styles using the directive below.
-
-```styl
-@import 'node_modules/dragula/dragula'
-```
+You can add them by including `dist/dragula.css` in your document.
 
 # Usage
 
@@ -133,11 +136,11 @@ var drake = dragula();
 
 The options are detailed below.
 
-#### `options.containers`
+### `options.containers`
 
 Setting this option is effectively the same as passing the containers in the first argument to `dragula(containers, options)`.
 
-#### `options.isContainer`
+### `options.isContainer`
 
 Besides the containers that you pass to `dragula`, or the containers you dynamically `push` or `unshift` from [drake.containers](#drakecontainers), you can also use this method to specify any sort of logic that defines what is a container for this particular `drake` instance.
 
@@ -151,17 +154,17 @@ var drake = dragula({
 });
 ```
 
-#### `options.moves`
+### `options.moves`
 
 You can define a `moves` method which will be invoked with `(el, source, handle, sibling)` whenever an element is clicked. If this method returns `false`, a drag event won't begin, and the event won't be prevented either. The `handle` element will be the original click target, which comes in handy to test if that element is an expected _"drag handle"_.
 
-#### `options.accepts`
+### `options.accepts`
 
 You can set `accepts` to a method with the following signature: `(el, target, source, sibling)`. It'll be called to make sure that an element `el`, that came from container `source`, can be dropped on container `target` before a `sibling` element. The `sibling` can be `null`, which would mean that the element would be placed as the last element in the container. Note that if `options.copy` is set to `true`, `el` will be set to the copy, instead of the originally dragged element.
 
 Also note that **the position where a drag starts is always going to be a valid place where to drop the element**, even if `accepts` returned `false` for all cases.
 
-#### `options.copy`
+### `options.copy`
 
 If `copy` is set to `true` _(or a method that returns `true`)_, items will be copied rather than moved. This implies the following differences:
 
@@ -179,7 +182,7 @@ copy: function (el, source) {
   return el.className === 'you-may-copy-us';
 }
 ```
-#### `options.copySortSource`
+### `options.copySortSource`
 
 If `copy` is set to `true` _(or a method that returns `true`)_ and `copySortSource` is `true` as well, users will be able to sort elements in `copy`-source containers.
 
@@ -188,19 +191,19 @@ copy: true,
 copySortSource: true
 ```
 
-#### `options.revertOnSpill`
+### `options.revertOnSpill`
 
 By default, spilling an element outside of any containers will move the element back to the _drop position previewed by the feedback shadow_. Setting `revertOnSpill` to `true` will ensure elements dropped outside of any approved containers are moved back to the source element where the drag event began, rather than stay at the _drop position previewed by the feedback shadow_.
 
-#### `options.removeOnSpill`
+### `options.removeOnSpill`
 
 By default, spilling an element outside of any containers will move the element back to the _drop position previewed by the feedback shadow_. Setting `removeOnSpill` to `true` will ensure elements dropped outside of any approved containers are removed from the DOM. Note that `remove` events won't fire if `copy` is set to `true`.
 
-#### `options.direction`
+### `options.direction`
 
 When an element is dropped onto a container, it'll be placed near the point where the mouse was released. If the `direction` is `'vertical'`, the default value, the Y axis will be considered. Otherwise, if the `direction` is `'horizontal'`, the X axis will be considered.
 
-#### `options.invalid`
+### `options.invalid`
 
 You can provide an `invalid` method with a `(el, handle)` signature. This method should return `true` for elements that shouldn't trigger a drag. The `handle` argument is the element that was clicked, while `el` is the item that would be dragged. Here's the default implementation, which doesn't prevent any drags.
 
@@ -220,11 +223,11 @@ invalid: function (el, handle) {
 }
 ```
 
-#### `options.mirrorContainer`
+### `options.mirrorContainer`
 
 The DOM element where the mirror element displayed while dragging will be appended to. Defaults to `document.body`.
 
-#### `options.ignoreInputTextSelection`
+### `options.ignoreInputTextSelection`
 
 When this option is enabled, if the user clicks on an input element the drag won't start until their mouse pointer exits the input. This translates into the user being able to select text in inputs contained inside draggable elements, and still drag the element by moving their mouse outside of the input -- so you get the best of both worlds.
 
@@ -234,23 +237,23 @@ This option is enabled by default. Turn it off by setting it to `false`. If its 
 
 The `dragula` method returns a tiny object with a concise API. We'll refer to the API returned by `dragula` as `drake`.
 
-#### `drake.containers`
+### `drake.containers`
 
 This property contains the collection of containers that was passed to `dragula` when building this `drake` instance. You can `push` more containers and `splice` old containers at will.
 
-#### `drake.dragging`
+### `drake.dragging`
 
 This property will be `true` whenever an element is being dragged.
 
-#### `drake.start(item)`
+### `drake.start(item)`
 
 Enter drag mode **without a shadow**. This method is most useful when providing complementary keyboard shortcuts to an existing drag and drop solution. Even though a shadow won't be created at first, the user will get one as soon as they click on `item` and start dragging it around. Note that if they click and drag something else, `.end` will be called before picking up the new item.
 
-#### `drake.end()`
+### `drake.end()`
 
 Gracefully end the drag event as if using **the last position marked by the preview shadow** as the drop target. The proper `cancel` or `drop` event will be fired, depending on whether the item was dropped back where it was originally lifted from _(which is essentially a no-op that's treated as a `cancel` event)_.
 
-#### `drake.cancel(revert)`
+### `drake.cancel(revert)`
 
 If an element managed by `drake` is currently being dragged, this method will gracefully cancel the drag action. You can also pass in `revert` at the method invocation level, effectively producing the same result as if `revertOnSpill` was `true`.
 
@@ -259,11 +262,11 @@ Note that **a _"cancellation"_ will result in a `cancel` event** only in the fol
 - `revertOnSpill` is `true`
 - Drop target _(as previewed by the feedback shadow)_ is the source container **and** the item is dropped in the same position where it was originally dragged from
 
-#### `drake.remove()`
+### `drake.remove()`
 
 If an element managed by `drake` is currently being dragged, this method will gracefully remove it from the DOM.
 
-#### `drake.on` _(Events)_
+### `drake.on` _(Events)_
 
 The `drake` is an event emitter. The following events can be tracked using `drake.on(type, listener)`:
 
@@ -279,7 +282,7 @@ Event Name | Listener Arguments               | Event Description
 `out`      | `el, container, source`          | `el` was dragged out of `container` or dropped, and originally came from `source`
 `cloned`   | `clone, original, type`          | DOM element `original` was cloned as `clone`, of `type` _(`'mirror'` or `'copy'`)_. Fired for mirror images and when `copy: true`
 
-#### `drake.canMove(item)`
+### `drake.canMove(item)`
 
 Returns whether the `drake` instance can accept drags for a DOM element `item`. This method returns `true` when all the conditions outlined below are met, and `false` otherwise.
 
@@ -287,7 +290,7 @@ Returns whether the `drake` instance can accept drags for a DOM element `item`. 
 - `item` passes the pertinent [`invalid`](#optionsinvalid) checks
 - `item` passes a `moves` check
 
-#### `drake.destroy()`
+### `drake.destroy()`
 
 Removes all drag and drop events used by `dragula` to manage drag and drop between the `containers`. If `.destroy` is called while an element is being dragged, the drag will be effectively cancelled.
 
@@ -300,39 +303,10 @@ Dragula uses only four CSS classes. Their purpose is quickly explained below, bu
 - `gu-mirror` is added to the mirror image. It handles fixed positioning and `z-index` _(and removes any prior margins on the element)_. Note that the mirror image is appended to the `mirrorContainer`, not to its initial container. Keep that in mind when styling your elements with nested rules, like `.list .item { padding: 10px; }`.
 - `gu-hide` is a helper class to apply `display: none` to an element.
 
-# Contributing
-
-See [contributing.markdown][14] for details.
-
-# Support
-
-We have a [dedicated support channel in Slack][24]. See [this issue][21] to get an invite. Support requests won't be handled through the repository.
-
 # License
 
 MIT
 
-[1]: https://github.com/bevacqua/dragula/blob/master/resources/demo.png
-[2]: http://bevacqua.github.io/dragula/
-[3]: https://github.com/bevacqua/dragula/blob/master/resources/logo.png
-[4]: https://travis-ci.org/bevacqua/dragula
-[5]: https://travis-ci.org/bevacqua/dragula.svg
-[6]: https://david-dm.org/bevacqua/dragula.svg
-[7]: https://david-dm.org/bevacqua/dragula
-[8]: https://github.com/bevacqua/angularjs-dragula
-[9]: https://github.com/bevacqua/react-dragula
-[10]: http://bevacqua.github.io/angularjs-dragula/
-[11]: http://bevacqua.github.io/react-dragula/
-[12]: https://github.com/bevacqua/dragula/blob/master/dist/dragula.css
-[13]: https://github.com/bevacqua/dragula/blob/master/dist/dragula.min.css
-[14]: https://github.com/bevacqua/dragula/blob/master/.github/contributing.markdown
-[15]: https://github.com/bevacqua/dragula/blob/master/dist
-[16]: #css
-[17]: https://david-dm.org/bevacqua/dragula/dev-status.svg
-[18]: https://david-dm.org/bevacqua/dragula#info=devDependencies
-[19]: https://rawgit.com/bevacqua/dragula/master/resources/patreon.svg
-[20]: https://patreon.com/bevacqua
-[21]: https://github.com/bevacqua/dragula/issues/248
-[22]: https://github.com/valor-software/ng2-dragula
-[23]: http://valor-software.com/ng2-dragula/index.html
-[24]: https://dragula.slack.com
+[1]: https://github.com/bpmn-io/dragula/blob/main/resources/demo.png
+[2]: http://bpmn-io.github.io/dragula/
+[3]: https://github.com/bpmn-io/dragula/blob/main/resources/logo.png
