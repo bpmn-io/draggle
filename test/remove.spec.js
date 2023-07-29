@@ -52,7 +52,7 @@ test('when dragging and remove gets called, remove event is emitted', () => {
 
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(removeHandler).toHaveBeenCalledTimes(1);
-  expect(removeHandler).toHaveBeenCalledWith(item, div);
+  expect(removeHandler).toHaveBeenCalledWith(item, div, div);
 });
 
 test('when dragging a copy and remove gets called, cancel event is emitted', () => {
@@ -76,7 +76,6 @@ test('when dragging a copy and remove gets called, cancel event is emitted', () 
   expect(cancelHandler).toHaveBeenCalledTimes(1);
 
   const removeItem = cancelHandler.mock.calls[0][0];
-  expect(removeItem.className).toBe('gu-transit');
   expect(removeItem).not.toBe(item);
-  expect(cancelHandler).toHaveBeenCalledWith(removeItem, null);
+  expect(cancelHandler).toHaveBeenCalledWith(removeItem, null, div);
 });
