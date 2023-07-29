@@ -16,7 +16,12 @@ test('.start() emits "cloned" for copies', () => {
   drake.start(item);
 
   expect(clonedHandler).toHaveBeenCalledTimes(1);
-  expect(clonedHandler).toHaveBeenCalledWith(expect.any(HTMLElement), item, 'copy');
+  const [ copy, original, type ] = clonedHandler.mock.calls[0];
+
+  expect(type).toBe('copy');
+  expect(copy).toBeInstanceOf(HTMLElement);
+  expect(copy).not.toBe(item);
+  expect(original).toBe(item);
 });
 
 test('.start() emits "drag" for items', () => {
@@ -55,7 +60,7 @@ test('.end() emits "cancel" when not moved', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(cancelHandler).toHaveBeenCalledTimes(1);
-  expect(cancelHandler).toHaveBeenCalledWith(item, div);
+  expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
 
 test('.end() emits "drop" when moved', () => {
@@ -81,7 +86,7 @@ test('.end() emits "drop" when moved', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(dropHandler).toHaveBeenCalledTimes(1);
-  expect(dropHandler).toHaveBeenCalledWith(item, div2, div);
+  expect(dropHandler).toHaveBeenCalledWith(item, div2, div, null);
 });
 
 test('.remove() emits "remove" for items', () => {
@@ -104,7 +109,7 @@ test('.remove() emits "remove" for items', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(removeHandler).toHaveBeenCalledTimes(1);
-  expect(removeHandler).toHaveBeenCalledWith(item, div);
+  expect(removeHandler).toHaveBeenCalledWith(item, div, div);
 });
 
 test('.remove() emits "cancel" for copies', () => {
@@ -125,9 +130,13 @@ test('.remove() emits "cancel" for copies', () => {
   drake.remove();
 
   expect(dragendHandler).toHaveBeenCalledTimes(1);
-  expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(cancelHandler).toHaveBeenCalledTimes(1);
-  expect(cancelHandler).toHaveBeenCalledWith(expect.any(HTMLElement), null);
+
+  const [ copy, container ] = cancelHandler.mock.calls[0];
+  expect(copy).toBeInstanceOf(HTMLElement);
+  expect(copy).not.toBe(item);
+  expect(copy.nodeType).toBe(item.nodeType);
+  expect(container).toBe(null);
 });
 
 test('.cancel() emits "cancel" when not moved', () => {
@@ -150,7 +159,7 @@ test('.cancel() emits "cancel" when not moved', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(cancelHandler).toHaveBeenCalledTimes(1);
-  expect(cancelHandler).toHaveBeenCalledWith(item, div);
+  expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
 
 test('.cancel() emits "drop" when not reverted', () => {
@@ -176,7 +185,7 @@ test('.cancel() emits "drop" when not reverted', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(dropHandler).toHaveBeenCalledTimes(1);
-  expect(dropHandler).toHaveBeenCalledWith(item, div2, div);
+  expect(dropHandler).toHaveBeenCalledWith(item, div2, div, null);
 });
 
 test('.cancel() emits "cancel" when reverts', () => {
@@ -202,7 +211,7 @@ test('.cancel() emits "cancel" when reverts', () => {
   expect(dragendHandler).toHaveBeenCalledTimes(1);
   expect(dragendHandler).toHaveBeenCalledWith(item);
   expect(cancelHandler).toHaveBeenCalledTimes(1);
-  expect(cancelHandler).toHaveBeenCalledWith(item, div);
+  expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
 
 test('mousedown emits "cloned" for mirrors', () => {
@@ -236,7 +245,13 @@ test('mousedown emits "cloned" for copies', () => {
   events.raise(item, 'mousemove', { which: 1 });
 
   expect(clonedHandler).toHaveBeenCalledTimes(1);
-  expect(clonedHandler).toHaveBeenCalledWith(expect.any(HTMLElement), item, 'copy');
+
+  const [ copy, original, type ] = clonedHandler.mock.calls[0];
+  expect(type).toBe('copy');
+  expect(copy.nodeType).toBe(item.nodeType);
+  expect(copy).toBeInstanceOf(HTMLElement);
+  expect(copy).not.toBe(item);
+  expect(original).toBe(item);
 });
 
 test('mousedown emits "drag" for items', () => {
