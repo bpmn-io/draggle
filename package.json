@@ -45,8 +45,7 @@
   },
   "homepage": "https://github.com/bpmn-io/draggle",
   "dependencies": {
-    "contra": "^1.9.4",
-    "crossvent": "^1.5.5"
+    "contra": "^1.9.4"
   },
   "devDependencies": {
     "@vitest/browser": "^0.33.0",

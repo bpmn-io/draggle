@@ -1,4 +1,3 @@
-import crossvent from 'crossvent';
 import dragula from '..';
 
 var sortable = $('sortable');
@@ -37,7 +36,7 @@ dragula([$('left-copy-1tomany'), $('right-copy-1tomany')], {
 
 dragula([sortable]);
 
-crossvent.add(sortable, 'click', clickHandler);
+sortable.addEventListener('click', clickHandler);
 
 function clickHandler (e) {
   var target = e.target;
