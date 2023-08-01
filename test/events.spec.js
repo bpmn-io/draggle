@@ -52,8 +52,8 @@ test('.end() emits "cancel" when not moved', () => {
   drake.on('dragend', dragendHandler);
   drake.on('cancel', cancelHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   drake.end();
 
@@ -77,8 +77,8 @@ test('.end() emits "drop" when moved', () => {
   drake.on('dragend', dragendHandler);
   drake.on('drop', dropHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
   div2.appendChild(item);
 
   drake.end();
@@ -101,8 +101,8 @@ test('.remove() emits "remove" for items', () => {
   drake.on('dragend', dragendHandler);
   drake.on('remove', removeHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   drake.remove();
 
@@ -124,8 +124,8 @@ test('.remove() emits "cancel" for copies', () => {
   drake.on('dragend', dragendHandler);
   drake.on('cancel', cancelHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   drake.remove();
 
@@ -151,8 +151,8 @@ test('.cancel() emits "cancel" when not moved', () => {
   drake.on('dragend', dragendHandler);
   drake.on('cancel', cancelHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   drake.cancel();
 
@@ -176,8 +176,8 @@ test('.cancel() emits "drop" when not reverted', () => {
   drake.on('dragend', dragendHandler);
   drake.on('drop', dropHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
   div2.appendChild(item);
 
   drake.cancel();
@@ -202,8 +202,8 @@ test('.cancel() emits "cancel" when reverts', () => {
   drake.on('dragend', dragendHandler);
   drake.on('cancel', cancelHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
   div2.appendChild(item);
 
   drake.cancel();
@@ -214,7 +214,7 @@ test('.cancel() emits "cancel" when reverts', () => {
   expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
 
-test('mousedown emits "cloned" for mirrors', () => {
+test('pointerdown emits "cloned" for mirrors', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
   const drake = dragula([ div ]);
@@ -224,14 +224,14 @@ test('mousedown emits "cloned" for mirrors', () => {
   const clonedHandler = vi.fn();
   drake.on('cloned', clonedHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   expect(clonedHandler).toHaveBeenCalledTimes(1);
   expect(clonedHandler).toHaveBeenCalledWith(expect.any(HTMLElement), item, 'mirror');
 });
 
-test('mousedown emits "cloned" for copies', () => {
+test('pointerdown emits "cloned" for copies', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
   const drake = dragula([ div ], { copy: true });
@@ -241,8 +241,8 @@ test('mousedown emits "cloned" for copies', () => {
   const clonedHandler = vi.fn();
   drake.on('cloned', clonedHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   // todo(pinussilvestrus): investigate why it is called twice
   // expect(clonedHandler).toHaveBeenCalledTimes(1);
@@ -256,7 +256,7 @@ test('mousedown emits "cloned" for copies', () => {
   expect(original).toBe(item);
 });
 
-test('mousedown emits "drag" for items', () => {
+test('pointerdown emits "drag" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
   const drake = dragula([ div ]);
@@ -266,8 +266,8 @@ test('mousedown emits "drag" for items', () => {
   const dragHandler = vi.fn();
   drake.on('drag', dragHandler);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   expect(dragHandler).toHaveBeenCalledTimes(1);
   expect(dragHandler).toHaveBeenCalledWith(item, div);

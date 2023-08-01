@@ -62,8 +62,8 @@ test('when dragging a copy and remove gets called, cancel event is emitted', () 
   div.appendChild(item);
   document.body.appendChild(div);
 
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
 
   const cancelHandler = vi.fn();
   const dragendHandler = vi.fn();
