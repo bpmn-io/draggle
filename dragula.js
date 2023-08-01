@@ -127,8 +127,11 @@ function dragula(initialContainers = [], options = {}) {
     }
 
     if (o.ignoreInputTextSelection) {
-      const clientX = getCoord('clientX', e) || 0;
-      const clientY = getCoord('clientY', e) || 0;
+      const {
+        clientX = 0,
+        clientY = 0
+      } = e;
+
       const elementBehindCursor = doc.elementFromPoint(clientX, clientY);
       if (isInput(elementBehindCursor)) {
         return;
@@ -142,8 +145,14 @@ function dragula(initialContainers = [], options = {}) {
     start(grabbed);
 
     const offset = getOffset(_item);
-    _offsetX = getCoord('pageX', e) - offset.left;
-    _offsetY = getCoord('pageY', e) - offset.top;
+
+    const {
+      pageX = 0,
+      pageY = 0
+    } = e;
+
+    _offsetX = pageX - offset.left;
+    _offsetY = pageY - offset.top;
 
     add(_copy || _item, 'gu-transit');
     renderMirrorImage();
@@ -236,8 +245,11 @@ function dragula(initialContainers = [], options = {}) {
       return;
     }
     const item = _copy || _item;
-    const clientX = getCoord('clientX', e) || 0;
-    const clientY = getCoord('clientY', e) || 0;
+    const {
+      clientX = 0,
+      clientY = 0
+    } = e;
+
     const elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
     const dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
     if (dropTarget && ((_copy && o.copySortSource) || (!_copy || dropTarget !== _source))) {
@@ -359,8 +371,11 @@ function dragula(initialContainers = [], options = {}) {
     }
     e.preventDefault();
 
-    const clientX = getCoord('clientX', e) || 0;
-    const clientY = getCoord('clientY', e) || 0;
+    const {
+      clientX = 0,
+      clientY = 0
+    } = e;
+
     const x = clientX - _offsetX;
     const y = clientY - _offsetY;
 
@@ -553,32 +568,6 @@ function nextEl(el) {
     } while (sibling && sibling.nodeType !== 1);
     return sibling;
   }
-}
-
-function getEventHost(e) {
-
-  // on touchend event, we have to use `e.changedTouches`
-  // see http://stackoverflow.com/questions/7192563/touchend-event-properties
-  // see https://github.com/bevacqua/dragula/issues/34
-  if (e.targetTouches && e.targetTouches.length) {
-    return e.targetTouches[0];
-  }
-  if (e.changedTouches && e.changedTouches.length) {
-    return e.changedTouches[0];
-  }
-  return e;
-}
-
-function getCoord(coord, e) {
-  const host = getEventHost(e);
-  const missMap = {
-    pageX: 'clientX', // IE8
-    pageY: 'clientY' // IE8
-  };
-  if (coord in missMap && !(coord in host) && missMap[coord] in host) {
-    coord = missMap[coord];
-  }
-  return host[coord];
 }
 
 export default dragula;
