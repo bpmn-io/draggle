@@ -25,8 +25,8 @@ function testCase(desc, eventOptions, options) {
   div.appendChild(item);
   document.body.appendChild(div);
   drake.on('drag', drag);
-  events.raise(o.containerClick ? div : item, 'mousedown', eventOptions);
-  events.raise(o.containerClick ? div : item, 'mousemove');
+  events.raise(o.containerClick ? div : item, 'pointerdown', eventOptions);
+  events.raise(o.containerClick ? div : item, 'pointermove');
   expect(drake.dragging).toBe(passes);
   function drag(target, container) {
     expect(passes).toBe(true);
@@ -35,7 +35,7 @@ function testCase(desc, eventOptions, options) {
   }
 }
 
-test('when already dragging, mousedown/mousemove ends (cancels) previous drag', () => {
+test('when already dragging, pointerdown/pointermove ends (cancels) previous drag', () => {
 
   // The test implementation is provided for this case in the previous code.
 });
@@ -56,8 +56,8 @@ test('when dragging, element gets gu-transit class', () => {
   dragula([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
   expect(item.className).toBe('gu-transit');
 });
 
@@ -67,8 +67,8 @@ test('when dragging, body gets gu-unselectable class', () => {
   dragula([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
-  events.raise(item, 'mousedown', { which: 1 });
-  events.raise(item, 'mousemove', { which: 1 });
+  events.raise(item, 'pointerdown', { which: 1 });
+  events.raise(item, 'pointermove', { which: 1 });
   expect(document.body.className).toBe('gu-unselectable');
 });
 

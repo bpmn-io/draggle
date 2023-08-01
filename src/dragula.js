@@ -51,12 +51,12 @@ function dragula(initialContainers = [], options = {}) {
 
   function events(cancel) {
     const op = cancel ? 'removeEventListener' : 'addEventListener';
-    docElement[op]('mousedown', grab, true);
-    docElement[op]('mouseup', release, true);
+    docElement[op]('pointerdown', grab, true);
+    docElement[op]('pointerup', release, true);
   }
 
   function eventualMovements(cancel) {
-    docElement[cancel ? 'removeEventListener' : 'addEventListener']('mousemove', startBecauseMouseMoved, true);
+    docElement[cancel ? 'removeEventListener' : 'addEventListener']('pointermove', startBecauseMouseMoved, true);
   }
 
   function movements(cancel) {
@@ -89,7 +89,7 @@ function dragula(initialContainers = [], options = {}) {
     }
     _grabbed = context;
     eventualMovements();
-    if (e.type === 'mousedown') {
+    if (e.type === 'pointerdown') {
       if (isInput(item)) { // see also: https://github.com/bevacqua/dragula/issues/208
         item.focus(); // fixes https://github.com/bevacqua/dragula/issues/176
       } else {
