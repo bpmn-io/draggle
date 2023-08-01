@@ -1,11 +1,9 @@
-import dragula from '..';
+import { initOptions } from '../src/util';
 
 import { test, expect } from 'vitest';
 
 test('drake has sensible default options', () => {
-  const options = {};
-  dragula(options);
-
+  const options = initOptions({});
   expect(typeof options.moves).toBe('function');
   expect(typeof options.accepts).toBe('function');
   expect(typeof options.invalid).toBe('function');

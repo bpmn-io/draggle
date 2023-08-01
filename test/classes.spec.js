@@ -1,4 +1,4 @@
-import { add, rm } from '../classes';
+import { add, rm } from '../src/classes';
 
 import { test, expect } from 'vitest';
 
