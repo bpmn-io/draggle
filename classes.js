@@ -1,9 +1,9 @@
-var cache = {};
-var start = '(?:^|\\s)';
-var end = '(?:\\s|$)';
+const cache = {};
+const start = '(?:^|\\s)';
+const end = '(?:\\s|$)';
 
 export function lookupClass(className) {
-  var cached = cache[className];
+  let cached = cache[className];
   if (cached) {
     cached.lastIndex = 0;
   } else {
@@ -13,7 +13,7 @@ export function lookupClass(className) {
 }
 
 export function add(el, className) {
-  var current = el.className;
+  const current = el.className;
   if (!current.length) {
     el.className = className;
   } else if (!lookupClass(className).test(current)) {

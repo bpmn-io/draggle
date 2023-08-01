@@ -1,6 +1,6 @@
 import dragula from '..';
 
-var sortable = $('sortable');
+const sortable = $('sortable');
 
 dragula([$('left-defaults'), $('right-defaults')]);
 dragula([$('left-copy'), $('right-copy')], { copy: true });
@@ -39,7 +39,7 @@ dragula([sortable]);
 sortable.addEventListener('click', clickHandler);
 
 function clickHandler (e) {
-  var target = e.target;
+  const target = e.target;
   if (target === sortable) {
     return;
   }
