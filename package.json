@@ -1,5 +1,5 @@
 {
-  "name": "@bpmn-io/dragula",
+  "name": "@bpmn-io/draggle",
   "type": "module",
   "version": "3.7.3",
   "description": "Drag and drop so simple it hurts",
@@ -26,14 +26,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bpmn-io/dragula.git"
+    "url": "https://github.com/bpmn-io/draggle.git"
   },
   "author": "Nicolas Bevacqua <nicolasbevacqua@gmail.com> (http://bevacqua.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bpmn-io/dragula/issues"
+    "url": "https://github.com/bpmn-io/draggle/issues"
   },
-  "homepage": "https://github.com/bpmn-io/dragula",
+  "homepage": "https://github.com/bpmn-io/draggle",
   "dependencies": {
     "contra": "^1.9.4",
     "crossvent": "^1.5.5"
