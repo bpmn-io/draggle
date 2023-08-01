@@ -22,7 +22,8 @@
     "build:js": "vite build",
     "build:css": "copyfiles -f dragula.css dist",
     "lint": "eslint",
-    "test": "vitest"
+    "dev": "vitest",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
