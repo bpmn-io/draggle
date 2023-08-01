@@ -1,5 +1,6 @@
 import emitter from 'contra/emitter';
 import { add, rm } from './classes';
+import { initOptions, getOffset, getElementBehindPoint, getRectWidth, getRectHeight, getParent, isInput, nextEl, whichMouseButton } from './util';
 
 window.global ||= window;
 
@@ -23,21 +24,7 @@ function dragula(initialContainers = [], options = {}) {
   let _mirror, _source, _item, _offsetX, _offsetY, _moveX, _moveY, _initialSibling,
       _currentSibling, _copy, _renderTimer, _lastDropTarget, _grabbed;
 
-  const o = {
-    moves: always,
-    accepts: always,
-    invalid: invalidTarget,
-    containers: initialContainers,
-    isContainer: never,
-    copy: false,
-    copySortSource: false,
-    revertOnSpill: false,
-    removeOnSpill: false,
-    direction: 'vertical',
-    ignoreInputTextSelection: true,
-    mirrorContainer: doc.body,
-    ...options
-  };
+  const o = initOptions(options, initialContainers);
 
   const drake = emitter({
     containers: o.containers,
@@ -91,8 +78,8 @@ function dragula(initialContainers = [], options = {}) {
     _moveX = e.clientX;
     _moveY = e.clientY;
 
-    const ignore = whichMouseButton(e) !== 1 || e.metaKey || e.ctrlKey;
-    if (ignore) {
+    const isNotSimpleMouseClick = whichMouseButton(e) !== 1 || e.metaKey || e.ctrlKey;
+    if (isNotSimpleMouseClick) {
       return; // we only care about honest-to-god left clicks and touch events
     }
     const item = e.target;
@@ -218,10 +205,6 @@ function dragula(initialContainers = [], options = {}) {
 
     drake.dragging = true;
     drake.emit('drag', _item, _source);
-  }
-
-  function invalidTarget() {
-    return false;
   }
 
   function end() {
@@ -503,70 +486,6 @@ function dragula(initialContainers = [], options = {}) {
 
   function isCopy(item, container) {
     return typeof o.copy === 'boolean' ? o.copy : o.copy(item, container);
-  }
-}
-
-function whichMouseButton(e) {
-  if (e.touches !== void 0) { return e.touches.length; }
-  if (e.which !== void 0 && e.which !== 0) { return e.which; } // see https://github.com/bevacqua/dragula/issues/261
-  if (e.buttons !== void 0) { return e.buttons; }
-  const button = e.button;
-  if (button !== void 0) { // see https://github.com/jquery/jquery/blob/99e8ff1baa7ae341e94bb89c3e84570c7c3ad9ea/src/event.js#L573-L575
-
-    // eslint-disable-next-line no-bitwise
-    return button & 1 ? 1 : button & 2 ? 3 : (button & 4 ? 2 : 0);
-  }
-}
-
-function getOffset(el) {
-  const rect = el.getBoundingClientRect();
-  return {
-    left: rect.left + getScroll('scrollLeft', 'pageXOffset'),
-    top: rect.top + getScroll('scrollTop', 'pageYOffset')
-  };
-}
-
-function getScroll(scrollProp, offsetProp) {
-  if (typeof global[offsetProp] !== 'undefined') {
-    return global[offsetProp];
-  }
-  if (docElement.clientHeight) {
-    return docElement[scrollProp];
-  }
-  return doc.body[scrollProp];
-}
-
-function getElementBehindPoint(point, x, y) {
-  point = point || {};
-  const state = point.className || '';
-  let el;
-  point.className += ' gu-hide';
-  el = doc.elementFromPoint(x, y);
-  point.className = state;
-  return el;
-}
-
-function never() { return false; }
-function always() { return true; }
-function getRectWidth(rect) { return rect.width || (rect.right - rect.left); }
-function getRectHeight(rect) { return rect.height || (rect.bottom - rect.top); }
-function getParent(el) { return el.parentNode === doc ? null : el.parentNode; }
-function isInput(el) { return el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || isEditable(el); }
-function isEditable(el) {
-  if (!el) { return false; } // no parents were editable
-  if (el.contentEditable === 'false') { return false; } // stop the lookup
-  if (el.contentEditable === 'true') { return true; } // found a contentEditable element in the chain
-  return isEditable(getParent(el)); // contentEditable is set to 'inherit'
-}
-
-function nextEl(el) {
-  return el.nextElementSibling || manually();
-  function manually() {
-    let sibling = el;
-    do {
-      sibling = sibling.nextSibling;
-    } while (sibling && sibling.nodeType !== 1);
-    return sibling;
   }
 }
 
