@@ -1,6 +1,16 @@
 import emitter from 'contra/emitter';
 import { add, rm } from './classes';
-import { initOptions, getOffset, getElementBehindPoint, getRectWidth, getRectHeight, getParent, isInput, nextEl, whichMouseButton } from './util';
+import {
+  initializeOptions,
+  getElementBehindPoint,
+  calculateOffset,
+  getRectHeight,
+  getRectWidth,
+  getParent,
+  isInputField,
+  getNextElement,
+  whichMouseButton
+} from './util';
 
 window.global ||= window;
 
@@ -24,7 +34,7 @@ function dragula(initialContainers = [], options = {}) {
   let _mirror, _source, _item, _offsetX, _offsetY, _moveX, _moveY, _initialSibling,
       _currentSibling, _copy, _renderTimer, _lastDropTarget, _grabbed;
 
-  const o = initOptions(options, initialContainers);
+  const o = initializeOptions(options, initialContainers);
 
   const drake = emitter({
     containers: o.containers,
@@ -90,7 +100,7 @@ function dragula(initialContainers = [], options = {}) {
     _grabbed = context;
     eventualMovements();
     if (e.type === 'pointerdown') {
-      if (isInput(item)) { // see also: https://github.com/bevacqua/dragula/issues/208
+      if (isInputField(item)) { // see also: https://github.com/bevacqua/dragula/issues/208
         item.focus(); // fixes https://github.com/bevacqua/dragula/issues/176
       } else {
         e.preventDefault(); // fixes https://github.com/bevacqua/dragula/issues/155
@@ -120,7 +130,7 @@ function dragula(initialContainers = [], options = {}) {
       } = e;
 
       const elementBehindCursor = doc.elementFromPoint(clientX, clientY);
-      if (isInput(elementBehindCursor)) {
+      if (isInputField(elementBehindCursor)) {
         return;
       }
     }
@@ -131,7 +141,7 @@ function dragula(initialContainers = [], options = {}) {
     end();
     start(grabbed);
 
-    const offset = getOffset(_item);
+    const offset = calculateOffset(_item);
 
     const {
       pageX = 0,
@@ -171,7 +181,7 @@ function dragula(initialContainers = [], options = {}) {
       return;
     }
 
-    const movable = o.moves(item, source, handle, nextEl(item));
+    const movable = o.moves(item, source, handle, getNextElement(item));
     if (!movable) {
       return;
     }
@@ -201,7 +211,7 @@ function dragula(initialContainers = [], options = {}) {
 
     _source = context.source;
     _item = context.item;
-    _initialSibling = _currentSibling = nextEl(context.item);
+    _initialSibling = _currentSibling = getNextElement(context.item);
 
     drake.dragging = true;
     drake.emit('drag', _item, _source);
@@ -320,7 +330,7 @@ function dragula(initialContainers = [], options = {}) {
     } else if (_mirror) {
       sibling = _currentSibling;
     } else {
-      sibling = nextEl(_copy || _item);
+      sibling = getNextElement(_copy || _item);
     }
     return target === _source && sibling === _initialSibling;
   }
@@ -397,7 +407,7 @@ function dragula(initialContainers = [], options = {}) {
     if (
       (reference === null && changed) ||
       reference !== item &&
-      reference !== nextEl(item)
+      reference !== getNextElement(item)
     ) {
       _currentSibling = reference;
       dropTarget.insertBefore(item, reference);
@@ -480,7 +490,7 @@ function dragula(initialContainers = [], options = {}) {
     }
 
     function resolve(after) {
-      return after ? nextEl(target) : target;
+      return after ? getNextElement(target) : target;
     }
   }
 
