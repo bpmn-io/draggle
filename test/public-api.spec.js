@@ -1,7 +1,7 @@
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
 test('public api matches expectation', () => {
-  expect(typeof dragula).toBe('function');
+  expect(typeof draggle).toBe('function');
 });

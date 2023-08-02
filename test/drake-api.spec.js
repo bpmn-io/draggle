@@ -1,16 +1,16 @@
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
 test('drake can be instantiated without throwing', () => {
   function drakeFactory() {
-    return dragula();
+    return draggle();
   }
-  expect(drakeFactory).not.toThrow('calling dragula() without arguments does not throw');
+  expect(drakeFactory).not.toThrow('calling draggle() without arguments does not throw');
 });
 
 test('drake has expected api properties', () => {
-  const drake = dragula();
+  const drake = draggle();
   expect(drake).not.toBeNull();
   expect(typeof drake).toBe('object');
   expect(Array.isArray(drake.containers)).toBe(true);

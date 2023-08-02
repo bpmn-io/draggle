@@ -1,5 +1,5 @@
 import events from './lib/events';
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
@@ -12,8 +12,8 @@ test('drag event gets emitted when clicking an item', () => {
   testCase('fails for meta-clicks', { which: 1, metaKey: true }, { passes: false });
   testCase('fails for ctrl-clicks', { which: 1, ctrlKey: true }, { passes: false });
   testCase('fails when clicking containers', { which: 1 }, { containerClick: true, passes: false });
-  testCase('fails whenever invalid returns true', { which: 1 }, { passes: false, dragulaOpts: { invalid: always } });
-  testCase('fails whenever moves returns false', { which: 1 }, { passes: false, dragulaOpts: { moves: never } });
+  testCase('fails whenever invalid returns true', { which: 1 }, { passes: false, draggleOpts: { invalid: always } });
+  testCase('fails whenever moves returns false', { which: 1 }, { passes: false, draggleOpts: { moves: never } });
 });
 
 function testCase(desc, eventOptions, options) {
@@ -21,7 +21,7 @@ function testCase(desc, eventOptions, options) {
   const div = document.createElement('div');
   const item = document.createElement(o.tag || 'div');
   const passes = o.passes !== false;
-  const drake = dragula([ div ], o.dragulaOpts);
+  const drake = draggle([ div ], o.draggleOpts);
   div.appendChild(item);
   document.body.appendChild(div);
   drake.on('drag', drag);
@@ -53,7 +53,7 @@ test('when copying, emits cloned with the copy', () => {
 test('when dragging, element gets gu-transit class', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  dragula([ div ]);
+  draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   events.raise(item, 'pointerdown', { which: 1 });
@@ -64,7 +64,7 @@ test('when dragging, element gets gu-transit class', () => {
 test('when dragging, body gets gu-unselectable class', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  dragula([ div ]);
+  draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   events.raise(item, 'pointerdown', { which: 1 });

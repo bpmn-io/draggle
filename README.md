@@ -20,22 +20,22 @@ npm install @bpmn-io/draggle --save
 Or a CDN.
 
 ```shell
-<script src='https://unpkg.com/@bpmn-io/draggle@4.0.0/dist/dragula.js'></script>
+<script src='https://unpkg.com/@bpmn-io/draggle@4.0.0/dist/draggle.js'></script>
 ```
 
 If you're not using either package manager, you can use `@bpmn-io/draggle` by downloading the files in the `dist` folder. We **strongly suggest** using `npm`, though.
 
 ### Including the JavaScript
 
-There's a caveat to `dragula`. You shouldn't include it in the `<head>` of your web applications. It's bad practice to place scripts in the `<head>`, and as such `dragula` makes no effort to support this use case.
+There's a caveat to `draggle`. You shouldn't include it in the `<head>` of your web applications. It's bad practice to place scripts in the `<head>`, and as such `draggle` makes no effort to support this use case.
 
-Place `dragula` in the `<body>`, instead.
+Place `draggle` in the `<body>`, instead.
 
 ### Including the CSS!
 
-There's a few CSS styles you need to incorporate in order for `dragula` to work as expected.
+There's a few CSS styles you need to incorporate in order for `draggle` to work as expected.
 
-You can add them by including `dist/dragula.css` in your document.
+You can add them by including `dist/draggle.css` in your document.
 
 ## Development
 
@@ -53,24 +53,24 @@ npm run all
 
 ## Usage
 
-Dragula provides the easiest possible API to make drag and drop a breeze in your applications.
+Draggle provides the easiest possible API to make drag and drop a breeze in your applications.
 
-### `dragula(containers?, options?)`
+### `draggle(containers?, options?)`
 
-By default, `dragula` will allow the user to drag an element in any of the `containers` and drop it in any other container in the list. If the element is dropped anywhere that's not one of the `containers`, the event will be gracefully cancelled according to the `revertOnSpill` and `removeOnSpill` options.
+By default, `draggle` will allow the user to drag an element in any of the `containers` and drop it in any other container in the list. If the element is dropped anywhere that's not one of the `containers`, the event will be gracefully cancelled according to the `revertOnSpill` and `removeOnSpill` options.
 
 Note that dragging is only triggered on left clicks, and only if no meta keys are pressed.
 
 The example below allows the user to drag elements from `left` into `right`, and from `right` into `left`.
 
 ```js
-dragula([document.querySelector('#left'), document.querySelector('#right')]);
+draggle([document.querySelector('#left'), document.querySelector('#right')]);
 ```
 
 You can also provide an `options` object. Here's an **overview of the default values**.
 
 ```js
-dragula(containers, {
+draggle(containers, {
   isContainer: function (el) {
     return false; // only elements in drake.containers will be taken into account
   },
@@ -98,7 +98,7 @@ dragula(containers, {
 You can omit the `containers` argument and add containers dynamically later on.
 
 ```js
-var drake = dragula({
+var drake = draggle({
   copy: true
 });
 drake.containers.push(container);
@@ -107,31 +107,31 @@ drake.containers.push(container);
 You can also set the `containers` from the `options` object.
 
 ```js
-var drake = dragula({ containers: containers });
+var drake = draggle({ containers: containers });
 ```
 
 And you could also not set any arguments, which defaults to a drake without containers and with the default options.
 
 ```js
-var drake = dragula();
+var drake = draggle();
 ```
 
 The options are detailed below.
 
 #### `options.containers`
 
-Setting this option is effectively the same as passing the containers in the first argument to `dragula(containers, options)`.
+Setting this option is effectively the same as passing the containers in the first argument to `draggle(containers, options)`.
 
 #### `options.isContainer`
 
-Besides the containers that you pass to `dragula`, or the containers you dynamically `push` or `unshift` from [drake.containers](#drakecontainers), you can also use this method to specify any sort of logic that defines what is a container for this particular `drake` instance.
+Besides the containers that you pass to `draggle`, or the containers you dynamically `push` or `unshift` from [drake.containers](#drakecontainers), you can also use this method to specify any sort of logic that defines what is a container for this particular `drake` instance.
 
-The example below dynamically treats all DOM elements with a CSS class of `dragula-container` as dragula containers for this `drake`.
+The example below dynamically treats all DOM elements with a CSS class of `draggle-container` as draggle containers for this `drake`.
 
 ```js
-var drake = dragula({
+var drake = draggle({
   isContainer: function (el) {
-    return el.classList.contains('dragula-container');
+    return el.classList.contains('draggle-container');
   }
 });
 ```
@@ -213,15 +213,15 @@ The DOM element where the mirror element displayed while dragging will be append
 
 When this option is enabled, if the user clicks on an input element the drag won't start until their mouse pointer exits the input. This translates into the user being able to select text in inputs contained inside draggable elements, and still drag the element by moving their mouse outside of the input -- so you get the best of both worlds.
 
-This option is enabled by default. Turn it off by setting it to `false`. If its disabled your users won't be able to select text in inputs within `dragula` containers with their mouse.
+This option is enabled by default. Turn it off by setting it to `false`. If its disabled your users won't be able to select text in inputs within `draggle` containers with their mouse.
 
 ### API
 
-The `dragula` method returns a tiny object with a concise API. We'll refer to the API returned by `dragula` as `drake`.
+The `draggle` method returns a tiny object with a concise API. We'll refer to the API returned by `draggle` as `drake`.
 
 #### `drake.containers`
 
-This property contains the collection of containers that was passed to `dragula` when building this `drake` instance. You can `push` more containers and `splice` old containers at will.
+This property contains the collection of containers that was passed to `draggle` when building this `drake` instance. You can `push` more containers and `splice` old containers at will.
 
 #### `drake.dragging`
 
@@ -274,11 +274,11 @@ Returns whether the `drake` instance can accept drags for a DOM element `item`. 
 
 #### `drake.destroy()`
 
-Removes all drag and drop events used by `dragula` to manage drag and drop between the `containers`. If `.destroy` is called while an element is being dragged, the drag will be effectively cancelled.
+Removes all drag and drop events used by `draggle` to manage drag and drop between the `containers`. If `.destroy` is called while an element is being dragged, the drag will be effectively cancelled.
 
 ### CSS
 
-Dragula uses only four CSS classes. Their purpose is quickly explained below, but you can check `dist/dragula.css` to see the corresponding CSS rules.
+Draggle uses only four CSS classes. Their purpose is quickly explained below, but you can check `dist/draggle.css` to see the corresponding CSS rules.
 
 - `gu-unselectable` is added to the `mirrorContainer` element when dragging. You can use it to style the `mirrorContainer` while something is being dragged.
 - `gu-transit` is added to the source element when its mirror image is dragged. It just adds opacity to it.

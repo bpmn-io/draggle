@@ -6,12 +6,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/dragula.js",
-  "module": "./dist/dragula.js",
+  "main": "./dist/draggle.js",
+  "module": "./dist/draggle.js",
   "exports": {
     ".": {
-      "import": "./dist/dragula.js",
-      "require": "./dist/dragula.umd.cjs"
+      "import": "./dist/draggle.js",
+      "require": "./dist/draggle.umd.cjs"
     }
   },
   "scripts": {
@@ -20,7 +20,7 @@
     "build": "run-s build:js build:css",
     "start": "vite",
     "build:js": "vite build",
-    "build:css": "copyfiles -f dragula.css dist",
+    "build:css": "copyfiles -f draggle.css dist",
     "lint": "eslint",
     "dev": "vitest",
     "test": "vitest run"

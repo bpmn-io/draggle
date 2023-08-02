@@ -1,17 +1,17 @@
-import dragula from '..';
+import draggle from '..';
 
 import { test, expect, vi } from 'vitest';
 
 test('destroy does not throw when not dragging, destroyed, or whatever', () => {
   test('a single time', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.destroy();
     }).not.toThrow();
   });
 
   test('multiple times', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.destroy();
       drake.destroy();
@@ -24,7 +24,7 @@ test('destroy does not throw when not dragging, destroyed, or whatever', () => {
 test('when dragging and destroy gets called, nothing happens', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   drake.start(item);
@@ -36,7 +36,7 @@ test('when dragging and destroy gets called, nothing happens', () => {
 test('when dragging and destroy gets called, dragend event is emitted gracefully', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   drake.start(item);
@@ -53,7 +53,7 @@ test('when dragging a copy and destroy gets called, default does not revert', ()
   const div = document.createElement('div');
   const div2 = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div, div2 ]);
+  const drake = draggle([ div, div2 ]);
   div.appendChild(item);
   document.body.appendChild(div);
   document.body.appendChild(div2);
@@ -74,7 +74,7 @@ test('when dragging a copy and destroy gets called, revert is executed', () => {
   const div = document.createElement('div');
   const div2 = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div, div2 ], { revertOnSpill: true });
+  const drake = draggle([ div, div2 ], { revertOnSpill: true });
   div.appendChild(item);
   document.body.appendChild(div);
   document.body.appendChild(div2);

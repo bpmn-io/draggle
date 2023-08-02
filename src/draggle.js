@@ -18,12 +18,12 @@ const doc = document;
 const docElement = doc.documentElement;
 
 /**
- * Setup dragula.
+ * Setup draggle.
  *
  * @param {Array} initialContainers - The initial set of containers
  * @param {Object} options - Configuration options
  */
-function dragula(initialContainers = [], options = {}) {
+function draggle(initialContainers = [], options = {}) {
 
   // if only options is provided
   if (!Array.isArray(initialContainers)) {
@@ -499,4 +499,4 @@ function dragula(initialContainers = [], options = {}) {
   }
 }
 
-export default dragula;
+export default draggle;

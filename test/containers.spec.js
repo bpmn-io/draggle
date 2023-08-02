@@ -1,9 +1,9 @@
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
 test('drake defaults to no containers', () => {
-  const drake = dragula();
+  const drake = draggle();
   expect(Array.isArray(drake.containers)).toBe(true);
   expect(drake.containers.length).toBe(0);
 });
@@ -11,7 +11,7 @@ test('drake defaults to no containers', () => {
 test('drake reads containers from array argument', () => {
   const el = document.createElement('div');
   const containers = [ el ];
-  const drake = dragula(containers);
+  const drake = draggle(containers);
   expect(drake.containers).toBe(containers);
   expect(drake.containers.length).toBe(1);
 });
@@ -19,7 +19,7 @@ test('drake reads containers from array argument', () => {
 test('drake reads containers from array in options', () => {
   const el = document.createElement('div');
   const containers = [ el ];
-  const drake = dragula({ containers: containers });
+  const drake = draggle({ containers: containers });
   expect(drake.containers).toBe(containers);
   expect(drake.containers.length).toBe(1);
 });
@@ -27,7 +27,7 @@ test('drake reads containers from array in options', () => {
 test('containers in options take precedent', () => {
   const el = document.createElement('div');
   const containers = [ el ];
-  const drake = dragula([], { containers: containers });
+  const drake = draggle([], { containers: containers });
   expect(drake.containers).toBe(containers);
   expect(drake.containers.length).toBe(1);
 });

@@ -1,5 +1,5 @@
 body {
-  background-color: #942A57;
+  background-color: #46667b;
   margin: 0 auto;
   max-width: 760px;
 }
@@ -24,15 +24,15 @@ body, input, button {
 
 h1 {
   text-align: center;
-  background-color: #AC5C7E;
+  background-color: #728ea6;
   margin-top: 20px;
   margin-bottom: 0;
   padding: 10px;
 }
 
 h3 {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-bottom: 5px solid #A13462;
+  background-color: rgba(154, 176, 236, 0.2);
+  border-bottom: 5px solid #778ebd;
   text-align: center;
   padding: 10px;
 }
@@ -127,7 +127,7 @@ input {
   outline: none;
   background-color: #ecf0f1;
   padding: 10px;
-  color: #942A57;
+  color: #2a6194;
   border: 0;
   margin: 5px 0;
   display: block;
@@ -136,7 +136,7 @@ input {
 
 button {
   background-color: #ecf0f1;
-  color: #942A57;
+  color: #2e2a94;
   border: 0;
   padding: 18px 12px;
   margin-left: 6px;
@@ -156,7 +156,7 @@ button:hover {
   border: 0;
 }
 
-/* dragula-specific example page styles */
+/* draggle-specific example page styles */
 .wrapper {
   display: table;
 }
@@ -230,7 +230,7 @@ button:hover {
   margin-left: -180px;
   padding: 1em;
   max-width: calc(130px + 2em);
-  background-color: #aa5579;
+  background-color: #55aa5e;
   text-align: center;
   font-size: 12px;
   font-family: Verdana, "Helvetica Neue", Helvetica, sans-serif;

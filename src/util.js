@@ -1,8 +1,8 @@
 /**
- * Initializes the dragula options.
+ * Initializes the draggle options.
  *
  * @param {Object} options - User defined options.
- * @param {Array} initialContainers - Initial containers for dragula.
+ * @param {Array} initialContainers - Initial containers for draggle.
  * @returns {Object} - The initialized options.
  */
 const initializeOptions = (options, initialContainers) => ({

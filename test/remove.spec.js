@@ -1,32 +1,32 @@
 import events from './lib/events';
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect, vi } from 'vitest';
 
 
 test('remove does not throw when not dragging', () => {
   test('a single time', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.remove();
-    }).not.toThrow('dragula ignores a single call to drake.remove');
+    }).not.toThrow('draggle ignores a single call to drake.remove');
   });
 
   test('multiple times', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.remove();
       drake.remove();
       drake.remove();
       drake.remove();
-    }).not.toThrow('dragula ignores multiple calls to drake.remove');
+    }).not.toThrow('draggle ignores multiple calls to drake.remove');
   });
 });
 
 test('when dragging and remove gets called, element is removed', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   drake.start(item);
@@ -38,7 +38,7 @@ test('when dragging and remove gets called, element is removed', () => {
 test('when dragging and remove gets called, remove event is emitted', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   drake.start(item);
@@ -58,7 +58,7 @@ test('when dragging and remove gets called, remove event is emitted', () => {
 test('when dragging a copy and remove gets called, cancel event is emitted', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ], { copy: true });
+  const drake = draggle([ div ], { copy: true });
   div.appendChild(item);
   document.body.appendChild(div);
 

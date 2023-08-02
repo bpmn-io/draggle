@@ -7,8 +7,8 @@ export default defineConfig({
     outDir: 'dist',
     lib: {
       entry: resolve(__dirname, 'index.js'),
-      name: 'dragula',
-      fileName: 'dragula',
+      name: 'draggle',
+      fileName: 'draggle',
     },
     commonjsOptions: {
       transformMixedEsModules: true
