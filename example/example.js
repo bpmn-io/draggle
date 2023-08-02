@@ -1,10 +1,10 @@
-import dragula from '..';
+import draggle from '..';
 
 const sortable = $('sortable');
 
-dragula([$('left-defaults'), $('right-defaults')]);
-dragula([$('left-copy'), $('right-copy')], { copy: true });
-dragula([$('left-events'), $('right-events')])
+draggle([$('left-defaults'), $('right-defaults')]);
+draggle([$('left-copy'), $('right-copy')], { copy: true });
+draggle([$('left-events'), $('right-events')])
   .on('drag', function (el) {
     el.className = el.className.replace('ex-moved', '');
   })
@@ -17,15 +17,15 @@ dragula([$('left-events'), $('right-events')])
   .on('out', function (el, container) {
     container.className = container.className.replace('ex-over', '');
   });
-dragula([$('left-rollbacks'), $('right-rollbacks')], { revertOnSpill: true });
-dragula([$('left-lovehandles'), $('right-lovehandles')], {
+draggle([$('left-rollbacks'), $('right-rollbacks')], { revertOnSpill: true });
+draggle([$('left-lovehandles'), $('right-lovehandles')], {
   moves: function (el, container, handle) {
     return handle.classList.contains('handle');
   }
 });
 
-dragula([$('left-rm-spill'), $('right-rm-spill')], { removeOnSpill: true });
-dragula([$('left-copy-1tomany'), $('right-copy-1tomany')], {
+draggle([$('left-rm-spill'), $('right-rm-spill')], { removeOnSpill: true });
+draggle([$('left-copy-1tomany'), $('right-copy-1tomany')], {
   copy: function (el, source) {
     return source === $('left-copy-1tomany');
   },
@@ -34,7 +34,7 @@ dragula([$('left-copy-1tomany'), $('right-copy-1tomany')], {
   }
 });
 
-dragula([sortable]);
+draggle([sortable]);
 
 sortable.addEventListener('click', clickHandler);
 

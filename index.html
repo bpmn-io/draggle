@@ -1,10 +1,10 @@
 <!doctype html>
 <meta charset='utf-8'>
 <link rel="shortcut icon" href="favicon.ico">
-<link href='dist/dragula.css' rel='stylesheet' type='text/css' />
+<link href='dist/draggle.css' rel='stylesheet' type='text/css' />
 <link href='example/example.css' rel='stylesheet' type='text/css' />
 <title>bpmn-io/draggle</title>
-<h1><a href='https://github.com/bpmn-io/draggle'><img src='resources/logo.svg' onerror='this.src="resources/logo.png"' alt='dragula logo'/></a></h1>
+<h1><a href='https://github.com/bpmn-io/draggle'><img src='resources/logo.png' alt='draggle logo'/></a></h1>
 <h3 class='tagline'><span class='tagline-text'>Drag and drop so simple it hurts</span></h3>
 <div class='examples'>
   <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=githubcombpmn-io" id="_carbonads_js"></script>
@@ -15,7 +15,7 @@
         <div>You can move these elements between these two containers</div>
         <div>Moving them anywhere else isn't quite possible</div>
         <div>Anything can be moved around. That includes images, <a href='https://github.com/bpmn-io/draggle'>links</a>, or any other nested elements.
-        <div class='image-thing'><img src='resources/icon.svg' onerror='this.src="resources/icon.png"' alt='dragula'/></div><sub>(You can still click on links, as usual!)</sub>
+        <div class='image-thing'><img src='resources/icon.png' alt='draggle'/></div><sub>(You can still click on links, as usual!)</sub>
         </div>
       </div>
       <div id='right-defaults' class='container'>
@@ -28,7 +28,7 @@
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)]);
+draggle([document.getElementById(left), document.getElementById(right)]);
       </code>
     </pre>
   </div>
@@ -50,7 +50,7 @@ dragula([document.getElementById(left), document.getElementById(right)]);
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)])
+draggle([document.getElementById(left), document.getElementById(right)])
   .on('drag', function (el) {
     el.className = el.className.replace('ex-moved', '');
   }).on('drop', function (el) {
@@ -81,7 +81,7 @@ dragula([document.getElementById(left), document.getElementById(right)])
     </div>
     <pre>
       <code>
-dragula([document.getElementById(single)], {
+draggle([document.getElementById(single)], {
   removeOnSpill: true
 });
       </code>
@@ -102,7 +102,7 @@ dragula([document.getElementById(single)], {
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)], {
+draggle([document.getElementById(left), document.getElementById(right)], {
   revertOnSpill: true
 });
       </code>
@@ -123,7 +123,7 @@ dragula([document.getElementById(left), document.getElementById(right)], {
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)], {
+draggle([document.getElementById(left), document.getElementById(right)], {
   copy: true
 });
       </code>
@@ -144,7 +144,7 @@ dragula([document.getElementById(left), document.getElementById(right)], {
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)], {
+draggle([document.getElementById(left), document.getElementById(right)], {
   copy: function (el, source) {
     return source === document.getElementById(left)
   },
@@ -169,7 +169,7 @@ dragula([document.getElementById(left), document.getElementById(right)], {
     </div>
     <pre>
       <code>
-dragula([document.getElementById(left), document.getElementById(right)], {
+draggle([document.getElementById(left), document.getElementById(right)], {
   moves: function (el, container, handle) {
     return handle.className === 'handle';
   }
@@ -192,7 +192,7 @@ dragula([document.getElementById(left), document.getElementById(right)], {
     </div>
     <pre>
       <code>
-        dragula([document.getElementById(container)]);
+        draggle([document.getElementById(container)]);
       </code>
     </pre>
   </div>
@@ -205,5 +205,5 @@ dragula([document.getElementById(left), document.getElementById(right)], {
     var global = window;
   }
 </script>
-<script type="module" src='dist/dragula.js'></script>
+<script type="module" src='dist/draggle.js'></script>
 <script type="module" src='example/example.js'></script>

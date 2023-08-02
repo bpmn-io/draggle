@@ -1,2 +1,2 @@
-import dragula from './src/dragula';
-export default dragula;
+import draggle from './src/draggle';
+export default draggle;

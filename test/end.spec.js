@@ -1,15 +1,15 @@
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
 test('end does not throw when not dragging', () => {
   test('a single time', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => drake.end()).not.toThrow();
   });
 
   test('multiple times', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.end();
       drake.end();
@@ -23,7 +23,7 @@ test('when already dragging, .end() ends (cancels) previous drag', () => {
   const div = document.createElement('div');
   const item1 = document.createElement('div');
   const item2 = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item1);
   div.appendChild(item2);
   document.body.appendChild(div);
@@ -44,7 +44,7 @@ test('when already dragged, ends (drops) previous drag', () => {
   const div2 = document.createElement('div');
   const item1 = document.createElement('div');
   const item2 = document.createElement('div');
-  const drake = dragula([ div, div2 ]);
+  const drake = draggle([ div, div2 ]);
   div.appendChild(item1);
   div.appendChild(item2);
   document.body.appendChild(div);

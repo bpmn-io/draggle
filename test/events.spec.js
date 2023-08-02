@@ -1,12 +1,12 @@
 import events from './lib/events';
-import dragula from '../dist/dragula';
+import draggle from '../dist/draggle';
 
 import { test, expect, vi } from 'vitest';
 
 test('.start() emits "cloned" for copies', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ], { copy: true });
+  const drake = draggle([ div ], { copy: true });
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -27,7 +27,7 @@ test('.start() emits "cloned" for copies', () => {
 test('.start() emits "drag" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -43,7 +43,7 @@ test('.start() emits "drag" for items', () => {
 test('.end() emits "cancel" when not moved', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -67,7 +67,7 @@ test('.end() emits "drop" when moved', () => {
   const div = document.createElement('div');
   const div2 = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div, div2 ]);
+  const drake = draggle([ div, div2 ]);
   div.appendChild(item);
   document.body.appendChild(div);
   document.body.appendChild(div2);
@@ -92,7 +92,7 @@ test('.end() emits "drop" when moved', () => {
 test('.remove() emits "remove" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -115,7 +115,7 @@ test('.remove() emits "remove" for items', () => {
 test('.remove() emits "cancel" for copies', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ], { copy: true });
+  const drake = draggle([ div ], { copy: true });
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -142,7 +142,7 @@ test('.remove() emits "cancel" for copies', () => {
 test('.cancel() emits "cancel" when not moved', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -166,7 +166,7 @@ test('.cancel() emits "drop" when not reverted', () => {
   const div = document.createElement('div');
   const div2 = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
   document.body.appendChild(div2);
@@ -192,7 +192,7 @@ test('.cancel() emits "cancel" when reverts', () => {
   const div = document.createElement('div');
   const div2 = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ], { revertOnSpill: true });
+  const drake = draggle([ div ], { revertOnSpill: true });
   div.appendChild(item);
   document.body.appendChild(div);
   document.body.appendChild(div2);
@@ -217,7 +217,7 @@ test('.cancel() emits "cancel" when reverts', () => {
 test('pointerdown emits "cloned" for mirrors', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -234,7 +234,7 @@ test('pointerdown emits "cloned" for mirrors', () => {
 test('pointerdown emits "cloned" for copies', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ], { copy: true });
+  const drake = draggle([ div ], { copy: true });
   div.appendChild(item);
   document.body.appendChild(div);
 
@@ -259,7 +259,7 @@ test('pointerdown emits "cloned" for copies', () => {
 test('pointerdown emits "drag" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
-  const drake = dragula([ div ]);
+  const drake = draggle([ div ]);
   div.appendChild(item);
   document.body.appendChild(div);
 

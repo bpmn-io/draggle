@@ -1,17 +1,17 @@
-import dragula from '..';
+import draggle from '..';
 
 import { test, describe, expect, vi } from 'vitest';
 
 describe('cancel', () => {
   test('does not throw when not dragging - a single time', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.cancel();
     }).not.toThrow();
   });
 
   test('does not throw when not dragging - multiple times', () => {
-    const drake = dragula();
+    const drake = draggle();
     expect(() => {
       drake.cancel();
       drake.cancel();
@@ -25,7 +25,7 @@ describe('when dragging and cancel gets called, nothing happens', () => {
   test('nothing happens', () => {
     const div = document.createElement('div');
     const item = document.createElement('div');
-    const drake = dragula([ div ]);
+    const drake = draggle([ div ]);
     div.appendChild(item);
     document.body.appendChild(div);
     drake.start(item);
@@ -39,7 +39,7 @@ describe('when dragging and cancel gets called, cancel event is emitted', () => 
   test('cancel event is emitted', () => {
     const div = document.createElement('div');
     const item = document.createElement('div');
-    const drake = dragula([ div ]);
+    const drake = draggle([ div ]);
     div.appendChild(item);
     document.body.appendChild(div);
     drake.start(item);
@@ -63,7 +63,7 @@ describe('when dragging a copy and cancel gets called, default does not revert',
     const div = document.createElement('div');
     const div2 = document.createElement('div');
     const item = document.createElement('div');
-    const drake = dragula([ div, div2 ]);
+    const drake = draggle([ div, div2 ]);
     div.appendChild(item);
     document.body.appendChild(div);
     document.body.appendChild(div2);
@@ -90,7 +90,7 @@ describe('when dragging a copy and cancel gets called, revert is executed', () =
     const div = document.createElement('div');
     const div2 = document.createElement('div');
     const item = document.createElement('div');
-    const drake = dragula([ div, div2 ]);
+    const drake = draggle([ div, div2 ]);
     div.appendChild(item);
     document.body.appendChild(div);
     document.body.appendChild(div2);
