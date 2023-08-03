@@ -195,6 +195,26 @@ draggle([document.getElementById(left), document.getElementById(right)], {
       </code>
     </pre>
   </div>
+  <div class='parent'>
+    <label for='hy'>Do you need to override the dragging offset to adjust to your custom dragging icons? <br>Or for any other reason really? </label>
+    <div class='wrapper'>
+      <div id='left-transform-offset' class='container'>
+        <div>Well don't worry about that</div>
+        <div>Because we've got you covered</div>
+        <div>Having some fun here</div>
+        <div>Randomizing the offset</div>
+      </div>
+      <div id='right-transform-offset' class='container'>
+        <div>But you can also</div>
+        <div>Define this behavior</div>
+        <div>Based on two more properties</div>
+        <div>The event and the dragged object</div>
+      </div>
+    </div>
+    <pre>
+      <code>[$('left-transform-offset'), $('right-transform-offset')], { transformOffset: ({ left, top }) => ({ left: left + Math.random() * 200 - 100, top: top + Math.random() * 200 - 100 }) });</code>
+    </pre>
+  </div>
 </div>
 <h3>Get it on GitHub! <a href='https://github.com/bpmn-io/draggle'>bpmn-io/draggle</a></h3>
 <h3>This project was forked from <a href='https://github.com/bevacqua/dragula'>bevacqua/dragula</a></h3>
