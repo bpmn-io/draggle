@@ -20,8 +20,20 @@ const docElement = doc.documentElement;
 /**
  * Setup draggle.
  *
- * @param {Array} initialContainers - The initial set of containers
- * @param {Object} options - Configuration options
+ * @param {Array} initialContainers - The initial set of containers.
+ * @param {Object} [options={}] - Configuration options.
+ * @param {Function} [options.moves] - A function determining whether an item can be moved; defaults to a function returning true.
+ * @param {Function} [options.accepts] - A function determining whether a container can accept an item; defaults to a function returning true.
+ * @param {Function} [options.invalid] - A function determining whether an item is invalid for dragging; defaults to a function returning false.
+ * @param {Function} [options.isContainer] - A function determining whether an element serves as a container; defaults to a function returning false.
+ * @param {Boolean} [options.copy=false] - Whether to copy items rather than moving them.
+ * @param {Boolean} [options.copySortSource=false] - Whether to keep a copy of the item in the original container when sorting.
+ * @param {Boolean} [options.revertOnSpill=false] - Whether to revert the item back to its original location when it's not dropped over a container.
+ * @param {Boolean} [options.removeOnSpill=false] - Whether to remove the item if it's not dropped over a container.
+ * @param {String | Function} [options.direction='vertical'] - The direction of the drag, can be 'vertical' or 'horizontal', or a function returning those two.
+ * @param {Function} [options.transformOffset] - A function for transforming the offset position of the dragged item.
+ * @param {Boolean} [options.ignoreInputTextSelection=true] - Whether to ignore text selection inside input and textarea fields.
+ * @param {HTMLElement} [options.mirrorContainer=document.body] - The container that will host the mirror element while dragging.
  */
 function draggle(initialContainers = [], options = {}) {
 
@@ -141,7 +153,8 @@ function draggle(initialContainers = [], options = {}) {
     end();
     start(grabbed);
 
-    const offset = calculateOffset(_item);
+    const calculatedOffset = calculateOffset(_item);
+    const offset = o.transformOffset(calculatedOffset, e, _item);
 
     const {
       pageX = 0,

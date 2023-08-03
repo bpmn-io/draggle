@@ -6,11 +6,12 @@
  * @returns {Object} - The initialized options.
  */
 const initializeOptions = (options, initialContainers) => ({
+  containers: initialContainers,
   moves: () => true,
   accepts: () => true,
   invalid: () => false,
-  containers: initialContainers,
   isContainer: () => false,
+  transformOffset: (offset) => offset,
   copy: false,
   copySortSource: false,
   revertOnSpill: false,
