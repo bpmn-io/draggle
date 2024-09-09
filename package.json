@@ -12,8 +12,13 @@
     ".": {
       "import": "./dist/draggle.js",
       "require": "./dist/draggle.umd.cjs"
-    }
+    },
+    "./package.json": "./package.json",
+    "./dist/draggle.css": "./dist/draggle.css"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "prepare": "run-s build",
     "all": "run-s build lint test",
