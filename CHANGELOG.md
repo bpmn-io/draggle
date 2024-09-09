@@ -6,7 +6,11 @@ The draggle release history starts with version [4.0.0](#400). For a complete ch
 
 ## Unreleased
 
-___Note:__ Yet to be released changes appear here._
+**\_Note:** Yet to be released changes appear here.\_
+
+## 4.1.1
+
+- `FIX`: fix packaging ([6b98ae1](https://github.com/bpmn-io/draggle/commit/6b98ae1e07a64bc15561bdd3c454bbc90bda046e))
 
 ## 4.1.0
 
