@@ -84,7 +84,7 @@ const getElementBehindPoint = (point = {}, x, y) => {
 const getRectWidth = rect => rect.width || (rect.right - rect.left);
 const getRectHeight = rect => rect.height || (rect.bottom - rect.top);
 const getParent = element => element.parentNode === document ? null : element.parentNode;
-const isInputField = element => [ 'INPUT', 'TEXTAREA', 'SELECT' ].includes(element.tagName) || isEditable(element);
+const isInputField = element => [ 'INPUT', 'TEXTAREA', 'SELECT' ].includes(element?.tagName) || isEditable(element);
 const isEditable = (element) => {
   if (!element) return false;
   if (element.contentEditable === 'false') return false;
