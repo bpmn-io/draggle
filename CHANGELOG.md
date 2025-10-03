@@ -6,7 +6,7 @@ The draggle release history starts with version [4.0.0](#400). For a complete ch
 
 ## Unreleased
 
-**\_Note:** Yet to be released changes appear here.\_
+_**Note:** Yet to be released changes appear here._
 
 ## 4.1.1
 
