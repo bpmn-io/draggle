@@ -1,8 +1,8 @@
 import draggle from '..';
 
-import { test, expect, vi } from 'vitest';
+import { test, expect, vi, describe } from 'vitest';
 
-test('destroy does not throw when not dragging, destroyed, or whatever', () => {
+describe('destroy does not throw when not dragging, destroyed, or whatever', () => {
   test('a single time', () => {
     const drake = draggle();
     expect(() => {

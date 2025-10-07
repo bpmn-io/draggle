@@ -1,8 +1,8 @@
 import draggle from '../dist/draggle';
 
-import { test, expect } from 'vitest';
+import { describe, test, expect } from 'vitest';
 
-test('end does not throw when not dragging', () => {
+describe('end does not throw when not dragging', () => {
   test('a single time', () => {
     const drake = draggle();
     expect(() => drake.end()).not.toThrow();

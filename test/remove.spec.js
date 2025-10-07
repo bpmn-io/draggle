@@ -1,10 +1,10 @@
 import events from './lib/events';
 import draggle from '../dist/draggle';
 
-import { test, expect, vi } from 'vitest';
+import { test, describe, expect, vi } from 'vitest';
 
+describe('remove does not throw when not dragging', () => {
 
-test('remove does not throw when not dragging', () => {
   test('a single time', () => {
     const drake = draggle();
     expect(() => {
