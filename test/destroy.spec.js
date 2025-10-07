@@ -2,7 +2,9 @@ import draggle from '..';
 
 import { test, expect, vi, describe } from 'vitest';
 
+
 describe('destroy does not throw when not dragging, destroyed, or whatever', () => {
+
   test('a single time', () => {
     const drake = draggle();
     expect(() => {
@@ -19,7 +21,9 @@ describe('destroy does not throw when not dragging, destroyed, or whatever', () 
       drake.destroy();
     }).not.toThrow();
   });
+
 });
+
 
 test('when dragging and destroy gets called, nothing happens', () => {
   const div = document.createElement('div');
@@ -32,6 +36,7 @@ test('when dragging and destroy gets called, nothing happens', () => {
   expect(div.children.length).toBe(1);
   expect(drake.dragging).toBe(false);
 });
+
 
 test('when dragging and destroy gets called, dragend event is emitted gracefully', () => {
   const div = document.createElement('div');
@@ -48,6 +53,7 @@ test('when dragging and destroy gets called, dragend event is emitted gracefully
   drake.on('dragend', dragendMock);
   drake.destroy();
 });
+
 
 test('when dragging a copy and destroy gets called, default does not revert', () => {
   const div = document.createElement('div');
@@ -69,6 +75,7 @@ test('when dragging a copy and destroy gets called, default does not revert', ()
   drake.on('drop', dropMock);
   drake.destroy();
 });
+
 
 test('when dragging a copy and destroy gets called, revert is executed', () => {
   const div = document.createElement('div');

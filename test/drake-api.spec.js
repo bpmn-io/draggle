@@ -2,12 +2,14 @@ import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
+
 test('drake can be instantiated without throwing', () => {
   function drakeFactory() {
     return draggle();
   }
   expect(drakeFactory).not.toThrow('calling draggle() without arguments does not throw');
 });
+
 
 test('drake has expected api properties', () => {
   const drake = draggle();

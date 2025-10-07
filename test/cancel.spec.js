@@ -2,7 +2,9 @@ import draggle from '..';
 
 import { test, describe, expect, vi } from 'vitest';
 
+
 describe('cancel', () => {
+
   test('does not throw when not dragging - a single time', () => {
     const drake = draggle();
     expect(() => {
@@ -21,7 +23,9 @@ describe('cancel', () => {
   });
 });
 
+
 describe('when dragging and cancel gets called, nothing happens', () => {
+
   test('nothing happens', () => {
     const div = document.createElement('div');
     const item = document.createElement('div');
@@ -33,9 +37,11 @@ describe('when dragging and cancel gets called, nothing happens', () => {
     expect(div.children.length).toBe(1);
     expect(drake.dragging).toBe(false);
   });
+
 });
 
 describe('when dragging and cancel gets called, cancel event is emitted', () => {
+
   test('cancel event is emitted', () => {
     const div = document.createElement('div');
     const item = document.createElement('div');
@@ -56,9 +62,12 @@ describe('when dragging and cancel gets called, cancel event is emitted', () => 
 
     drake.cancel();
   });
+
 });
 
+
 describe('when dragging a copy and cancel gets called, default does not revert', () => {
+
   test('default does not revert', () => {
     const div = document.createElement('div');
     const div2 = document.createElement('div');
@@ -83,9 +92,12 @@ describe('when dragging a copy and cancel gets called, default does not revert',
 
     drake.cancel();
   });
+
 });
 
+
 describe('when dragging a copy and cancel gets called, revert is executed', () => {
+
   test('revert is executed', () => {
     const div = document.createElement('div');
     const div2 = document.createElement('div');
@@ -109,4 +121,5 @@ describe('when dragging a copy and cancel gets called, revert is executed', () =
 
     drake.cancel(true);
   });
+
 });

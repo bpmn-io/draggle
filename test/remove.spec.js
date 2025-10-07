@@ -3,6 +3,7 @@ import draggle from '../dist/draggle';
 
 import { test, describe, expect, vi } from 'vitest';
 
+
 describe('remove does not throw when not dragging', () => {
 
   test('a single time', () => {
@@ -21,7 +22,9 @@ describe('remove does not throw when not dragging', () => {
       drake.remove();
     }).not.toThrow('draggle ignores multiple calls to drake.remove');
   });
+
 });
+
 
 test('when dragging and remove gets called, element is removed', () => {
   const div = document.createElement('div');
@@ -34,6 +37,7 @@ test('when dragging and remove gets called, element is removed', () => {
   expect(div.children.length).toBe(0);
   expect(drake.dragging).toBe(false);
 });
+
 
 test('when dragging and remove gets called, remove event is emitted', () => {
   const div = document.createElement('div');
@@ -54,6 +58,7 @@ test('when dragging and remove gets called, remove event is emitted', () => {
   expect(removeHandler).toHaveBeenCalledTimes(1);
   expect(removeHandler).toHaveBeenCalledWith(item, div, div);
 });
+
 
 test('when dragging a copy and remove gets called, cancel event is emitted', () => {
   const div = document.createElement('div');
