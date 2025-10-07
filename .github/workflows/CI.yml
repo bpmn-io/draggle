@@ -20,16 +20,21 @@ jobs:
         cache: npm
     - name: Install dependencies
       run: npm ci
-    - name: Project setup
-      uses: bpmn-io/actions/setup@latest
+    - name: Install Browsers
+      if: runner.os == 'Linux'
+      run: npx playwright install chromium firefox --with-deps
+    - name: Install Browsers
+      if: runner.os != 'Linux'
+      run: npx playwright install chromium --with-deps
     - name: Build
       if: runner.os == 'Linux'
       env:
-        COVERAGE: 1
-        TEST_BROWSERS: Firefox,ChromeHeadless
+        HEADLESS: 1
+        TEST_BROWSERS: chromium,firefox
       run: xvfb-run npm run all
     - name: Build
       if: runner.os != 'Linux'
       env:
-        TEST_BROWSERS: ChromeHeadless
+        HEADLESS: 1
+        TEST_BROWSERS: chromium
       run: npm run all
