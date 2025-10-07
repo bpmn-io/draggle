@@ -2,7 +2,9 @@ import draggle from '../dist/draggle';
 
 import { describe, test, expect } from 'vitest';
 
+
 describe('end does not throw when not dragging', () => {
+
   test('a single time', () => {
     const drake = draggle();
     expect(() => drake.end()).not.toThrow();
@@ -17,7 +19,9 @@ describe('end does not throw when not dragging', () => {
       drake.end();
     }).not.toThrow();
   });
+
 });
+
 
 test('when already dragging, .end() ends (cancels) previous drag', () => {
   const div = document.createElement('div');
@@ -38,6 +42,7 @@ test('when already dragging, .end() ends (cancels) previous drag', () => {
   drake.end();
   expect(drake.dragging).toBe(false);
 });
+
 
 test('when already dragged, ends (drops) previous drag', () => {
   const div = document.createElement('div');

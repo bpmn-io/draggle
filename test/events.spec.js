@@ -3,6 +3,7 @@ import draggle from '../dist/draggle';
 
 import { test, expect, vi } from 'vitest';
 
+
 test('.start() emits "cloned" for copies', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -24,6 +25,7 @@ test('.start() emits "cloned" for copies', () => {
   expect(original).toBe(item);
 });
 
+
 test('.start() emits "drag" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -39,6 +41,7 @@ test('.start() emits "drag" for items', () => {
   expect(dragHandler).toHaveBeenCalledTimes(1);
   expect(dragHandler).toHaveBeenCalledWith(item, div);
 });
+
 
 test('.end() emits "cancel" when not moved', () => {
   const div = document.createElement('div');
@@ -62,6 +65,7 @@ test('.end() emits "cancel" when not moved', () => {
   expect(cancelHandler).toHaveBeenCalledTimes(1);
   expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
+
 
 test('.end() emits "drop" when moved', () => {
   const div = document.createElement('div');
@@ -89,6 +93,7 @@ test('.end() emits "drop" when moved', () => {
   expect(dropHandler).toHaveBeenCalledWith(item, div2, div, null);
 });
 
+
 test('.remove() emits "remove" for items', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -111,6 +116,7 @@ test('.remove() emits "remove" for items', () => {
   expect(removeHandler).toHaveBeenCalledTimes(1);
   expect(removeHandler).toHaveBeenCalledWith(item, div, div);
 });
+
 
 test('.remove() emits "cancel" for copies', () => {
   const div = document.createElement('div');
@@ -139,6 +145,7 @@ test('.remove() emits "cancel" for copies', () => {
   expect(container).toBe(null);
 });
 
+
 test('.cancel() emits "cancel" when not moved', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -161,6 +168,7 @@ test('.cancel() emits "cancel" when not moved', () => {
   expect(cancelHandler).toHaveBeenCalledTimes(1);
   expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
+
 
 test('.cancel() emits "drop" when not reverted', () => {
   const div = document.createElement('div');
@@ -188,6 +196,7 @@ test('.cancel() emits "drop" when not reverted', () => {
   expect(dropHandler).toHaveBeenCalledWith(item, div2, div, null);
 });
 
+
 test('.cancel() emits "cancel" when reverts', () => {
   const div = document.createElement('div');
   const div2 = document.createElement('div');
@@ -214,6 +223,7 @@ test('.cancel() emits "cancel" when reverts', () => {
   expect(cancelHandler).toHaveBeenCalledWith(item, div, div);
 });
 
+
 test('pointerdown emits "cloned" for mirrors', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -230,6 +240,7 @@ test('pointerdown emits "cloned" for mirrors', () => {
   expect(clonedHandler).toHaveBeenCalledTimes(1);
   expect(clonedHandler).toHaveBeenCalledWith(expect.any(HTMLElement), item, 'mirror');
 });
+
 
 test('pointerdown emits "cloned" for copies', () => {
   const div = document.createElement('div');
@@ -255,6 +266,7 @@ test('pointerdown emits "cloned" for copies', () => {
   expect(copy).not.toBe(item);
   expect(original).toBe(item);
 });
+
 
 test('pointerdown emits "drag" for items', () => {
   const div = document.createElement('div');

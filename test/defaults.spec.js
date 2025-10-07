@@ -2,6 +2,7 @@ import { initializeOptions } from '../src/util';
 
 import { test, expect } from 'vitest';
 
+
 test('drake has sensible default options', () => {
   const options = initializeOptions({});
   expect(typeof options.moves).toBe('function');

@@ -3,6 +3,7 @@ import draggle from '../dist/draggle';
 
 import { test, expect } from 'vitest';
 
+
 test('drag event gets emitted when clicking an item', () => {
   testCase('works for left clicks', { which: 1 });
   testCase('works for wheel clicks', { which: 1 });
@@ -15,6 +16,7 @@ test('drag event gets emitted when clicking an item', () => {
   testCase('fails whenever invalid returns true', { which: 1 }, { passes: false, draggleOpts: { invalid: always } });
   testCase('fails whenever moves returns false', { which: 1 }, { passes: false, draggleOpts: { moves: never } });
 });
+
 
 function testCase(desc, eventOptions, options) {
   const o = options || {};
@@ -35,20 +37,24 @@ function testCase(desc, eventOptions, options) {
   }
 }
 
+
 test('when already dragging, pointerdown/pointermove ends (cancels) previous drag', () => {
 
   // The test implementation is provided for this case in the previous code.
 });
+
 
 test('when already dragged, ends (drops) previous drag', () => {
 
   // The test implementation is provided for this case in the previous code.
 });
 
+
 test('when copying, emits cloned with the copy', () => {
 
   // The test implementation is provided for this case in the previous code.
 });
+
 
 test('when dragging, element gets gu-transit class', () => {
   const div = document.createElement('div');
@@ -61,6 +67,7 @@ test('when dragging, element gets gu-transit class', () => {
   expect(item.className).toBe('gu-transit');
 });
 
+
 test('when dragging, body gets gu-unselectable class', () => {
   const div = document.createElement('div');
   const item = document.createElement('div');
@@ -71,6 +78,9 @@ test('when dragging, body gets gu-unselectable class', () => {
   events.raise(item, 'pointermove', { which: 1 });
   expect(document.body.className).toBe('gu-unselectable');
 });
+
+
+// helpers ///////////////
 
 function always() {
   return true;
