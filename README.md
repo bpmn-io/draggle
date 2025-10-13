@@ -2,24 +2,22 @@
 
 # @bpmn-io/draggle
 
-> Drag and drop so simple it hurts
-
-> This project was forked from [dragula](https://github.com/bevacqua/dragula).
-
 [![CI](https://github.com/bpmn-io/draggle/workflows/CI/badge.svg)](https://github.com/bpmn-io/draggle/actions?query=workflow%3ACI)
+
+Drag and drop so simple it hurts. Forked from [dragula](https://github.com/bevacqua/dragula).
 
 
 ## Install
 
 You can get it on npm.
 
-```shell
+```sh
 npm install @bpmn-io/draggle --save
 ```
 
 Or a CDN.
 
-```shell
+```html
 <script src='https://unpkg.com/@bpmn-io/draggle@4.0.0/dist/draggle.js'></script>
 ```
 
