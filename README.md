@@ -4,7 +4,7 @@
 
 > Drag and drop so simple it hurts
 
-> This project was forked from https://github.com/bevacqua/dragula
+> This project was forked from [dragula](https://github.com/bevacqua/dragula).
 
 [![CI](https://github.com/bpmn-io/draggle/workflows/CI/badge.svg)](https://github.com/bpmn-io/draggle/actions?query=workflow%3ACI)
 
@@ -89,9 +89,11 @@ draggle(containers, {
   revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
   removeOnSpill: false,              // spilling will `.remove` the element, if this is true
   mirrorContainer: document.body,    // set the element that gets mirror elements appended
-  ignoreInputTextSelection: true,     // allows users to select input text, see details below
-  slideFactorX: 0,               // allows users to select the amount of movement on the X axis before it is considered a drag instead of a click
-  slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
+  ignoreInputTextSelection: true,    // allows users to select input text, see details below
+  slideFactorX: 0,                   // allows users to select the amount of movement on the X axis before it is
+                                     // considered a drag instead of a click
+  slideFactorY: 0,                   // allows users to select the amount of movement on the Y axis before it is
+                                     // considered a drag instead of a click
 });
 ```
 
