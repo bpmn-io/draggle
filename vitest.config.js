@@ -1,5 +1,7 @@
 import { resolve } from 'node:path';
 
+import { playwright } from '@vitest/browser-playwright';
+import { preview } from '@vitest/browser-preview';
 import { defineConfig } from 'vite';
 
 const HEADLESS = !!process.env.HEADLESS;
@@ -15,7 +17,7 @@ export default defineConfig({
     browser: {
       enabled: true,
       headless: HEADLESS,
-      provider: HEADLESS ? 'playwright' : 'preview',
+      provider: HEADLESS ? playwright() : preview(),
       instances: TEST_BROWSERS.map(
         browser => ({ browser })
       )
