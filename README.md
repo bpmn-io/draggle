@@ -49,6 +49,10 @@ Execute the tests.
 npm run all
 ```
 
+For headless browser tests, set `HEADLESS=1` and `TEST_BROWSERS=chrome,firefox`.
+WebdriverIO uses installed browsers and can use driver paths supplied via
+`CHROMEDRIVER_PATH` and `GECKODRIVER_PATH`.
+
 ## Usage
 
 Draggle provides the easiest possible API to make drag and drop a breeze in your applications.
