@@ -49,9 +49,19 @@ Execute the tests.
 npm run all
 ```
 
-For headless browser tests, set `HEADLESS=1` and `TEST_BROWSERS=chrome,firefox`.
-WebdriverIO uses installed browsers and can use driver paths supplied via
-`CHROMEDRIVER_PATH` and `GECKODRIVER_PATH`.
+Install the test browsers once after installing or updating Playwright:
+
+```shell
+npx playwright install chromium firefox
+```
+
+Run the tests headlessly in Chromium, without a display server or browser paths:
+
+```shell
+npm run test:headless
+```
+
+`npm test` and `npm run dev` use a visible browser.
 
 ## Usage
 

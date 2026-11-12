@@ -20,34 +20,21 @@ jobs:
         cache: npm
     - name: Install dependencies
       run: npm ci
-    - name: Configure hosted browsers
-      shell: bash
-      run: |
-        case "$RUNNER_OS" in
-          Linux)
-            echo "CHROME_BIN=/usr/bin/google-chrome" >> "$GITHUB_ENV"
-            echo "FIREFOX_BIN=/usr/bin/firefox" >> "$GITHUB_ENV"
-            echo "GECKODRIVER_PATH=$GECKOWEBDRIVER/geckodriver" >> "$GITHUB_ENV"
-            echo "CHROMEDRIVER_PATH=$CHROMEWEBDRIVER/chromedriver" >> "$GITHUB_ENV"
-            ;;
-          macOS)
-            echo "CHROME_BIN=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" >> "$GITHUB_ENV"
-            echo "CHROMEDRIVER_PATH=$CHROMEWEBDRIVER/chromedriver" >> "$GITHUB_ENV"
-            ;;
-          Windows)
-            echo "CHROME_BIN=C:/Program Files/Google/Chrome/Application/chrome.exe" >> "$GITHUB_ENV"
-            echo "CHROMEDRIVER_PATH=C:/SeleniumWebDrivers/ChromeDriver/chromedriver.exe" >> "$GITHUB_ENV"
-            ;;
-        esac
+    - name: Install Browsers
+      if: runner.os == 'Linux'
+      run: npx playwright install chromium firefox
+    - name: Install Browsers
+      if: runner.os != 'Linux'
+      run: npx playwright install chromium
     - name: Build
       if: runner.os == 'Linux'
       env:
         HEADLESS: 1
-        TEST_BROWSERS: chrome,firefox
+        TEST_BROWSERS: chromium,firefox
       run: xvfb-run npm run all
     - name: Build
       if: runner.os != 'Linux'
       env:
         HEADLESS: 1
-        TEST_BROWSERS: chrome
+        TEST_BROWSERS: chromium
       run: npm run all
