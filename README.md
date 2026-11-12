@@ -49,20 +49,6 @@ Execute the tests.
 npm run all
 ```
 
-Install the test browsers once after installing or updating Playwright:
-
-```shell
-npx playwright install chromium firefox
-```
-
-Run the tests headlessly in Chromium, without a display server or browser paths:
-
-```shell
-npm run test:headless
-```
-
-`npm test` and `npm run dev` use a visible browser.
-
 ## Usage
 
 Draggle provides the easiest possible API to make drag and drop a breeze in your applications.

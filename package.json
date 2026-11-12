@@ -28,8 +28,7 @@
     "build:css": "copyfiles -f draggle.css dist",
     "lint": "eslint",
     "dev": "vitest",
-    "test": "vitest run",
-    "test:headless": "vitest run --browser.headless"
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -56,6 +55,7 @@
   "devDependencies": {
     "@vitest/browser": "^5.1.0",
     "@vitest/browser-playwright": "^5.1.0",
+    "@vitest/browser-preview": "^5.1.0",
     "@vitest/ui": "^5.1.0",
     "copyfiles": "^2.4.1",
     "eslint": "^9.39.5",
