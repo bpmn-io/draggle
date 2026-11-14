@@ -5,6 +5,7 @@ const sortable = $('sortable');
 draggle([$('left-defaults'), $('right-defaults')]);
 draggle([$('left-transform-offset'), $('right-transform-offset')], { transformOffset: ({ left, top }) => ({ left: left + Math.random() * 200 - 100, top: top + Math.random() * 200 - 100 }) });
 draggle([$('left-copy'), $('right-copy')], { copy: true });
+draggle([$('left-touch'), $('right-touch')]);
 draggle([$('left-events'), $('right-events')])
   .on('drag', function (el) {
     el.className = el.className.replace('ex-moved', '');
