@@ -29,12 +29,10 @@ jobs:
     - name: Build
       if: runner.os == 'Linux'
       env:
-        HEADLESS: 1
         TEST_BROWSERS: chromium,firefox
       run: xvfb-run npm run all
     - name: Build
       if: runner.os != 'Linux'
       env:
-        HEADLESS: 1
         TEST_BROWSERS: chromium
       run: npm run all

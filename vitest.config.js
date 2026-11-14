@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 const HEADLESS = !!process.env.HEADLESS;
 
-const TEST_BROWSERS = (process.env.TEST_BROWSERS || 'chrome').split(',');
+const TEST_BROWSERS = (process.env.TEST_BROWSERS || HEADLESS ? 'chromium' : 'chrome').split(',');
 
 export default defineConfig({
   test: {

@@ -28,7 +28,7 @@
     "build:css": "copyfiles -f draggle.css dist",
     "lint": "eslint",
     "dev": "vitest",
-    "test": "vitest run"
+    "test": "HEADLESS=1 vitest run"
   },
   "repository": {
     "type": "git",
