@@ -59,7 +59,7 @@ By default, `draggle` will allow the user to drag an element in any of the `cont
 
 Mouse dragging requires the left button and no meta keys.
 
-On touch devices, swipe scrolls and long press drags. Long press replaces native text selection and menus on draggable items; use [`invalid`](#optionsinvalid) to keep them.
+On touch devices, swipe scrolls and long press activates dragging, replacing native text selection and menus on draggable items.
 
 The example below allows the user to drag elements from `left` into `right`, and from `right` into `left`.
 
