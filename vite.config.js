@@ -6,7 +6,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     lib: {
-      entry: resolve(__dirname, 'index.js'),
+      entry: resolve(import.meta.dirname, 'index.js'),
       name: 'draggle',
       fileName: 'draggle',
     },

@@ -12,7 +12,7 @@ export default defineConfig({
   test: {
     globals: true,
     setupFiles: [
-      resolve(__dirname, 'test', 'setup.js')
+      resolve(import.meta.dirname, 'test', 'setup.js')
     ],
     browser: {
       enabled: true,
