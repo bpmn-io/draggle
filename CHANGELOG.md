@@ -8,6 +8,11 @@ The draggle release history starts with version [4.0.0](#400). For a complete ch
 
 _**Note:** Yet to be released changes appear here._
 
+## 4.2.0
+
+- `FEAT`: support touch dragging ([#13](https://github.com/bpmn-io/draggle/pull/13))
+- `FIX`: restore items on cancelled drags ([#13](https://github.com/bpmn-io/draggle/pull/13))
+
 ## 4.1.1
 
 - `FIX`: fix packaging ([6b98ae1](https://github.com/bpmn-io/draggle/commit/6b98ae1e07a64bc15561bdd3c454bbc90bda046e))
