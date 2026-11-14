@@ -301,14 +301,15 @@ function draggle(initialContainers = [], options = {}) {
     const item = _copy || _item;
     const parent = getParent(item);
     const initial = isInitialPlacement(parent);
-    if (initial === false && reverts) {
+    if (reverts) {
       if (_copy) {
         if (parent) {
           parent.removeChild(_copy);
         }
-      } else {
+      } else if (!initial) {
         _source.insertBefore(item, _initialSibling);
       }
+      rm(item, 'gu-hide');
     }
     if (initial || reverts) {
       drake.emit('cancel', item, _source, _source);
