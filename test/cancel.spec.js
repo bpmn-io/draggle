@@ -123,3 +123,41 @@ describe('when dragging a copy and cancel gets called, revert is executed', () =
   });
 
 });
+
+
+test('cancel removes a copy at its original position', () => {
+  const container = document.createElement('div');
+  const item = document.createElement('div');
+  const next = document.createElement('div');
+  const drake = draggle([ container ], { copy: true, copySortSource: true });
+  let copy;
+
+  container.append(item, next);
+  document.body.appendChild(container);
+  drake.on('cloned', clone => copy = clone);
+  drake.start(item);
+  container.insertBefore(copy, next);
+
+  drake.cancel(true);
+
+  expect(Array.from(container.children)).toEqual([ item, next ]);
+  drake.destroy();
+  container.remove();
+});
+
+test('cancel shows a spilled item again', () => {
+  const container = document.createElement('div');
+  const item = document.createElement('div');
+  const drake = draggle([ container ], { removeOnSpill: true });
+
+  container.appendChild(item);
+  document.body.appendChild(container);
+  drake.start(item);
+  drake.emit('out', item, container, container);
+
+  drake.cancel(true);
+
+  expect(item.classList.contains('gu-hide')).toBe(false);
+  drake.destroy();
+  container.remove();
+});
