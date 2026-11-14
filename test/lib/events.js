@@ -4,6 +4,8 @@ function raise(el, type, options) {
   e.initEvent(type, true, true);
   Object.keys(o).forEach(apply);
   el.dispatchEvent(e);
+  return e;
+
   function apply(key) {
     e[key] = o[key];
   }

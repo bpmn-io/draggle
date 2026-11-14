@@ -17,6 +17,9 @@ window.global ||= window;
 const doc = document;
 const docElement = doc.documentElement;
 
+const TOUCH_DRAG_DELAY = 400;
+const TOUCH_DRAG_THRESHOLD = 8;
+
 /**
  * Setup draggle.
  *
@@ -44,7 +47,8 @@ function draggle(initialContainers = [], options = {}) {
   }
 
   let _mirror, _source, _item, _offsetX, _offsetY, _moveX, _moveY, _initialSibling,
-      _currentSibling, _copy, _renderTimer, _lastDropTarget, _grabbed;
+      _currentSibling, _copy, _renderTimer, _lastDropTarget, _grabbed,
+      _touch, _touchTimer, _suppressClick;
 
   const o = initializeOptions(options, initialContainers);
 
@@ -75,6 +79,12 @@ function draggle(initialContainers = [], options = {}) {
     const op = cancel ? 'removeEventListener' : 'addEventListener';
     docElement[op]('pointerdown', grab, true);
     docElement[op]('pointerup', release, true);
+    docElement[op]('click', preventTouchClick, true);
+    docElement[op]('pointercancel', cancelTouch, true);
+    docElement[op]('contextmenu', preventTouchMenu, true);
+
+    // mobile browsers only let touch listeners registered before the gesture block scrolling
+    docElement[op]('touchmove', preventTouchScroll, { capture: true, passive: false });
   }
 
   function eventualMovements(cancel) {
@@ -96,7 +106,44 @@ function draggle(initialContainers = [], options = {}) {
     }
   }
 
+  function preventTouchMenu(e) {
+    if (_touch) {
+      e.preventDefault();
+    }
+  }
+
+  function preventTouchScroll(e) {
+    if (_mirror && e.cancelable) {
+      e.preventDefault(); // pointer events cannot stop native scrolling
+    }
+  }
+
+  function preventTouchClick(e) {
+    if (_suppressClick && e.detail !== 0 && _suppressClick.contains(e.target)) {
+      _suppressClick = null;
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+
+  function trackTouch(item) {
+    _touch = item;
+    add(item, 'gu-touch-drag');
+  }
+
+  function cancelTouch() {
+    if (_touch) {
+      cancel(true);
+      ungrab();
+    }
+  }
+
   function grab(e) {
+    if (_touch) {
+      cancelTouch(); // a second pointer, e.g. a pinch
+      return;
+    }
+    _suppressClick = null;
     _moveX = e.clientX;
     _moveY = e.clientY;
 
@@ -109,8 +156,23 @@ function draggle(initialContainers = [], options = {}) {
     if (!context) {
       return;
     }
+    if (e.pointerType === 'touch' && o.ignoreInputTextSelection && isInputField(item)) {
+      return;
+    }
     _grabbed = context;
     eventualMovements();
+    if (e.pointerType === 'touch') {
+      trackTouch(context.item);
+      _touchTimer = setTimeout(() => {
+        _grabbed = canStart(item); // the item may have changed during the hold
+        if (_grabbed) {
+          beginDrag(e);
+        } else {
+          ungrab();
+        }
+      }, TOUCH_DRAG_DELAY);
+      return;
+    }
     if (e.type === 'pointerdown') {
       if (isInputField(item)) { // see also: https://github.com/bevacqua/dragula/issues/208
         item.focus(); // fixes https://github.com/bevacqua/dragula/issues/176
@@ -122,6 +184,12 @@ function draggle(initialContainers = [], options = {}) {
 
   function startBecauseMouseMoved(e) {
     if (!_grabbed) {
+      return;
+    }
+    if (_touch) {
+      if (Math.hypot(e.clientX - _moveX, e.clientY - _moveY) > TOUCH_DRAG_THRESHOLD) {
+        ungrab(); // leave the gesture to native scrolling
+      }
       return;
     }
     if (whichMouseButton(e) === 0) {
@@ -147,10 +215,19 @@ function draggle(initialContainers = [], options = {}) {
       }
     }
 
+    beginDrag(e);
+  }
+
+  function beginDrag(e) {
     const grabbed = _grabbed; // call to end() unsets _grabbed
+    const touch = _touch;
     eventualMovements(true);
     movements();
     end();
+    if (touch) {
+      trackTouch(touch);
+      _suppressClick = touch;
+    }
     start(grabbed);
 
     const calculatedOffset = calculateOffset(_item);
@@ -239,6 +316,11 @@ function draggle(initialContainers = [], options = {}) {
   }
 
   function ungrab() {
+    clearTimeout(_touchTimer);
+    if (_touch) {
+      rm(_touch, 'gu-touch-drag');
+      _touch = null;
+    }
     _grabbed = false;
     eventualMovements(true);
     movements(true);

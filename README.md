@@ -57,7 +57,9 @@ Draggle provides the easiest possible API to make drag and drop a breeze in your
 
 By default, `draggle` will allow the user to drag an element in any of the `containers` and drop it in any other container in the list. If the element is dropped anywhere that's not one of the `containers`, the event will be gracefully cancelled according to the `revertOnSpill` and `removeOnSpill` options.
 
-Note that dragging is only triggered on left clicks, and only if no meta keys are pressed.
+Mouse dragging requires the left button and no meta keys.
+
+On touch devices, swipe scrolls and long press drags. Long press replaces native text selection and menus on draggable items; use [`invalid`](#optionsinvalid) to keep them.
 
 The example below allows the user to drag elements from `left` into `right`, and from `right` into `left`.
 
@@ -278,9 +280,10 @@ Removes all drag and drop events used by `draggle` to manage drag and drop betwe
 
 ### CSS
 
-Draggle uses only four CSS classes. Their purpose is quickly explained below, but you can check `dist/draggle.css` to see the corresponding CSS rules.
+Draggle uses only five CSS classes. Their purpose is quickly explained below, but you can check `dist/draggle.css` to see the corresponding CSS rules.
 
 - `gu-unselectable` is added to the `mirrorContainer` element when dragging. You can use it to style the `mirrorContainer` while something is being dragged.
+- `gu-touch-drag` is added to an item while it is touched. It suppresses native text selection and menus.
 - `gu-transit` is added to the source element when its mirror image is dragged. It just adds opacity to it.
 - `gu-mirror` is added to the mirror image. It handles fixed positioning and `z-index` _(and removes any prior margins on the element)_. Note that the mirror image is appended to the `mirrorContainer`, not to its initial container. Keep that in mind when styling your elements with nested rules, like `.list .item { padding: 10px; }`.
 - `gu-hide` is a helper class to apply `display: none` to an element.
