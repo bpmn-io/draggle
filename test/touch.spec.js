@@ -103,6 +103,25 @@ test('a non-primary touch cannot start a hold', () => {
   expect(drake.dragging).toBe(false);
 });
 
+test('touch dragging a copy does not copy touch styles', () => {
+  drake = draggle([ source, target ], { copy: true });
+  let copiedWithTouchClass;
+  drake.on('cloned', (clone, original, type) => {
+    if (type === 'copy') {
+      copiedWithTouchClass = clone.classList.contains('gu-touch-drag');
+    }
+  });
+  pointer('pointerdown');
+  vi.advanceTimersByTime(1000);
+  pointer('pointermove', { clientX: 300 });
+  pointer('pointerup', { clientX: 300 });
+  const copy = target.firstElementChild;
+  expect(copy).not.toBeNull();
+  expect(copy).not.toBe(item);
+  expect(copiedWithTouchClass).toBe(false);
+  expect(copy.classList.contains('gu-touch-drag')).toBe(false);
+});
+
 test('only an active touch drag prevents native touch movement', () => {
   drake = draggle([ source ]);
   pointer('pointerdown');
