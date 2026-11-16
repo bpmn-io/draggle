@@ -299,6 +299,9 @@ function draggle(initialContainers = [], options = {}) {
   function start(context) {
     if (isCopy(context.item, context.source)) {
       _copy = context.item.cloneNode(true);
+      if (_touch === context.item) {
+        rm(_copy, 'gu-touch-drag');
+      }
       drake.emit('cloned', _copy, context.item, 'copy');
     }
 

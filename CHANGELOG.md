@@ -9,6 +9,7 @@ The draggle release history starts with version [4.0.0](#400). For a complete ch
 _**Note:** Yet to be released changes appear here._
 
 - `FIX`: prevent secondary touches from starting drags ([#14](https://github.com/bpmn-io/draggle/pull/14))
+- `FIX`: prevent copied items from retaining touch-drag styles ([#14](https://github.com/bpmn-io/draggle/pull/14))
 
 ## 4.2.0
 
