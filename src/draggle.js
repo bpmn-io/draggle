@@ -143,6 +143,9 @@ function draggle(initialContainers = [], options = {}) {
       cancelTouch(); // a second pointer, e.g. a pinch
       return;
     }
+    if (e.pointerType === 'touch' && !e.isPrimary) {
+      return;
+    }
     _suppressClick = null;
     _moveX = e.clientX;
     _moveY = e.clientY;

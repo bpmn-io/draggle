@@ -86,10 +86,21 @@ test.each([ false, true ])('a second touch cancels a hold or active drag (picked
     pointer('pointermove', { clientX: 300 });
   }
   pointer('pointerdown', { pointerId: 2, isPrimary: false });
+  expect(item.classList.contains('gu-touch-drag')).toBe(false);
+  pointer('pointerdown', { pointerId: 3, isPrimary: false });
   vi.advanceTimersByTime(1000);
   expect(drake.dragging).toBe(false);
   expect(item.parentNode).toBe(source);
   expect(document.querySelector('.gu-mirror')).toBeNull();
+});
+
+test('a non-primary touch cannot start a hold', () => {
+  drake = draggle([ source, target ]);
+  pointer('pointerdown', {}, target);
+  pointer('pointerdown', { pointerId: 2, isPrimary: false });
+  expect(item.classList.contains('gu-touch-drag')).toBe(false);
+  vi.advanceTimersByTime(1000);
+  expect(drake.dragging).toBe(false);
 });
 
 test('only an active touch drag prevents native touch movement', () => {
